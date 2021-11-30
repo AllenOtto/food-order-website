@@ -33,6 +33,32 @@
     background-color: #3742fa;
 }
 
+.btn-secondary {
+    background-color: #21c555;
+    padding: 1%;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-secondary:hover {
+    background-color: #176838;
+}
+
+.btn-danger {
+    background-color: #f33e59;
+    padding: 1%;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-danger:hover {
+    background-color: #ad0916;
+}
+
 /* CSS for Menu */
 
 .menu {

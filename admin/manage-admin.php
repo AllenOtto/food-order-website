@@ -19,19 +19,19 @@
                     <td>1.</td>
                     <td>Allen Moturi</td>
                     <td>AllenO</td>
-                    <td>Update Admin Delete Admin</td>
+                    <td><a href="#" class="btn-secondary">Edit Details</a> <a href="#" class="btn-danger">Delete Admin</a></td>
                 </tr>
                 <tr>
                     <td>2.</td>
                     <td>Wendy Moturi</td>
                     <td>WendyM</td>
-                    <td>Update Admin Delete Admin</td>
+                    <td><a href="#" class="btn-secondary">Edit Details</a> <a href="#" class="btn-danger">Delete Admin</a></td>
                 </tr>
                 <tr>
                     <td>3.</td>
                     <td>Wilder Moturi</td>
                     <td>WilderM</td>
-                    <td>Update Admin Delete Admin</td>
+                    <td><a href="#" class="btn-secondary">Edit Details</a> <a href="#" class="btn-danger">Delete Admin</a></td>
                 </tr>
             </table>
 
