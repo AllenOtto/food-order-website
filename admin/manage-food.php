@@ -1,9 +1,9 @@
 <?php include('partials/menu.php'); ?>
 
-    <!-- Main Content Section Starts -->
-    <div class="main-content">
+<!-- Main Content Section Starts -->
+<div class="main-content">
         <div class="wrapper">
-            <h1>Categories</h1>
+            <h1>Food</h1>
 
             <div class="clearfix"></div>
         </div>        
