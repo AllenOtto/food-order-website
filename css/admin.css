@@ -1,5 +1,5 @@
 /* 
-    Author: Kepha Moturi;
+    Author: BitWilderInc;
     Theme: Food order Website Admin;
     Version: 1.0;
 */
@@ -20,10 +20,24 @@
     text-align: center;
 }
 
+.btn-primary {
+    background-color: #1e90ff;
+    padding: 1%;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #3742fa;
+}
+
 /* CSS for Menu */
 
 .menu {
     border-bottom: 1px solid gray;
+    background-color: #000;
 }
 
 .menu ul {
@@ -63,6 +77,20 @@
 .clearfix {
     float: none;
     clear: both;
+}
+
+.tbl-full {
+    width: 100%;
+}
+
+table tr th {
+    border-bottom: 1px solid black;
+    padding: 1%;
+    text-align: left;
+}
+
+table tr td {
+    padding: 1%;
 }
 
 /* CSS for footer */
