@@ -51,7 +51,18 @@
             password='$password'
         ";
         
-        // $res = mysqli_query($conn, $sql) or die(mysqli_error());
+        // 3. Execute query and save data to database 
+        $res = mysqli_query($conn, $sql) or die(mysqli_error());
+
+        // 4. Check whether (query is executed) data is inserted into database or not and display appropriate message
+        if( $res==True ) {
+            // Data inserted successfully
+            echo "Data inserted successfully!";
+        } else {
+            // Data insertion failed
+            echo "Data insertion failed!";
+        }
+
     }
 
 ?>
