@@ -37,6 +37,8 @@
                     if($res==TRUE) {
                         // Count rows to check if we have data in database or not
                         $count = mysqli_num_rows($res); // Function to get all rows in database
+                        
+                        $sn=1;
 
                         if($count>0) { // We have rows in DB
                             while($rows=mysqli_fetch_assoc($res))
@@ -45,7 +47,7 @@
                                 // While loop will run as long as we have data in DB
 
                                 // Get individual data
-                                $id=$rows['id'];
+                                $id=$sn++;
                                 $full_name=$rows['full_name'];
                                 $username=$rows['username'];
 
@@ -53,7 +55,7 @@
                                 ?>
                                 
                                 <tr>
-                                    <td><?php echo $id; ?></td>
+                                    <td><?php echo $id.'.'; ?></td>
                                     <td><?php echo $full_name; ?></td>
                                     <td><?php echo $username; ?></td>
                                     <td><a href="#" class="btn-secondary">Edit Details</a> <a href="#" class="btn-danger">Delete Admin</a></td>
