@@ -3,7 +3,19 @@
     <!-- Main Content Section Starts -->
     <div class="main-content">
         <div class="wrapper">
-            <h1>Manage Admins</h1><br><br>
+            <h1>Manage Admins</h1><br>
+
+            <?php 
+                if(isset($_SESSION['add'])) { // Checking if the session is set
+                    // If session is set, display session message
+                    echo $_SESSION['add'];
+                    // Remove session message on page refresh 
+                    unset($_SESSION['add']);
+                }
+            
+            ?>
+
+            <br><br><br>
             
             <!-- Button to add Admin -->
             <a href="add-admin.php" class="btn-primary">Add Admin</a><br><br>
