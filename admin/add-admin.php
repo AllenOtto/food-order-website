@@ -10,7 +10,7 @@
                     // Display session message if set
                     echo $_SESSION['add'];
                     // Remove session message on page refresh
-                    unset $_SESSION['add'];
+                    unset($_SESSION['add']);
                 }
             ?>
             
