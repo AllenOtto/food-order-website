@@ -12,6 +12,13 @@
                     // Remove session message on page refresh 
                     unset($_SESSION['add']);
                 }
+
+                if(isset($_SESSION['delete'])) {
+                    // If session variable has content, display it
+                    echo $_SESSION['delete'];
+                    // Remove session message on page refresh
+                    unset($_SESSION['delete']);
+                }
             
             ?>
 
@@ -40,14 +47,14 @@
                         
                         $sn=1;
 
-                        if($count>0) { // We have rows in DB
+                        if ($count>0) { // We have rows in DB
                             while($rows=mysqli_fetch_assoc($res))
                             { 
-                                // Using while loop to get all data from DB. 
+                                // Using while loop to get all data from DB
                                 // While loop will run as long as we have data in DB
 
                                 // Get individual data
-                                $id=$sn++;
+                                $id=$rows['id'];
                                 $full_name=$rows['full_name'];
                                 $username=$rows['username'];
 
@@ -55,10 +62,10 @@
                                 ?>
                                 
                                 <tr>
-                                    <td><?php echo $id.'.'; ?></td>
+                                    <td><?php echo $sn++; ?> . </td>
                                     <td><?php echo $full_name; ?></td>
                                     <td><?php echo $username; ?></td>
-                                    <td><a href="#" class="btn-secondary">Edit Details</a> <a href="#" class="btn-danger">Delete Admin</a></td>
+                                    <td><a href="#" class="btn-secondary">Edit Details</a> <a href="<?php echo SITEURL; ?>admin/delete-admin.php?id=<?php echo $id; ?>" class="btn-danger">Delete Admin</a></td>
                                 </tr>
 
                                 <?php
@@ -66,13 +73,8 @@
                                 
                             }
 
-                        } else { 
-                            // We have no data in DB 
-
                         }
 
-                    } else {
-                        // 
                     }
                 ?>
 

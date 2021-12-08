@@ -74,10 +74,8 @@
             // Create session variable to display message
             $_SESSION['add'] = 'Failed to add Admin';
             // Redirect page to add-admin.php
-            header('location:'.SITEURL.'admin/add-admin.php');
-            
+            header('location:'.SITEURL.'admin/add-admin.php');   
         }
-
     }
 
 ?>
