@@ -20,6 +20,12 @@
                     unset($_SESSION['delete']);
                 }
             
+                if(isset($_SESSION['update'])) {
+                    // If session variable has content, display it
+                    echo $_SESSION['update'];
+                    // Remove session message on page refresh
+                    unset ($_SESSION['update']);
+                }
             ?>
 
             <br><br><br>
