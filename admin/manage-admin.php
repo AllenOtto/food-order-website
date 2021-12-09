@@ -65,7 +65,7 @@
                                     <td><?php echo $sn++; ?> . </td>
                                     <td><?php echo $full_name; ?></td>
                                     <td><?php echo $username; ?></td>
-                                    <td><a href="#" class="btn-secondary">Edit Details</a> <a href="<?php echo SITEURL; ?>admin/delete-admin.php?id=<?php echo $id; ?>" class="btn-danger">Delete Admin</a></td>
+                                    <td><a href="<?php echo SITEURL; ?>admin/update-admin.php?id=<?php echo $id; ?>" class="btn-secondary">Edit Details</a> <a href="<?php echo SITEURL; ?>admin/delete-admin.php?id=<?php echo $id; ?>" class="btn-danger">Delete Admin</a></td>
                                 </tr>
 
                                 <?php
