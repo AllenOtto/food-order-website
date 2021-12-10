@@ -16,6 +16,11 @@
                         echo $_SESSION['login'];
                         unset($_SESSION['login']);
                     }
+
+                    if(isset($_SESSION['logout'])) {
+                        echo $_SESSION['logout'];
+                        unset($_SESSION['logout']);
+                    }
                 ?>
 
                 <!-- Login Form Starts Here -->
