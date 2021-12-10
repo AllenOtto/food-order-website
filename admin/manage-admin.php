@@ -26,6 +26,29 @@
                     // Remove session message on page refresh
                     unset ($_SESSION['update']);
                 }
+
+                //Password Update session message
+                if(isset($_SESSION['password-update'])) {
+                    // If password_update session variable has been assigned a message
+                    echo $_SESSION['password-update'];
+                    // Unset/Empty password_update session variable on page refresh
+                    unset($_SESSION['password-update']);
+                } 
+
+                // Wrong password for user at specified id
+                if(isset($_SESSION['wrong-password'])) {
+                    echo $_SESSION['wrong-password'];
+                    // unset session variable on page refresh
+                    unset($_SESSION['wrong-password']);
+                }
+
+                // Wrong password for user at specified id
+                if(isset($_SESSION['pwd-mismatch'])) {
+                    echo $_SESSION['pwd-mismatch'];
+                    // unset session variable on page refresh
+                    unset($_SESSION['pwd-mismatch']);
+                }
+
             ?>
 
             <br><br><br>
@@ -71,7 +94,11 @@
                                     <td><?php echo $sn++; ?> . </td>
                                     <td><?php echo $full_name; ?></td>
                                     <td><?php echo $username; ?></td>
-                                    <td><a href="<?php echo SITEURL; ?>admin/update-admin.php?id=<?php echo $id; ?>" class="btn-secondary">Edit Details</a> <a href="<?php echo SITEURL; ?>admin/delete-admin.php?id=<?php echo $id; ?>" class="btn-danger">Delete Admin</a></td>
+                                    <td>
+                                        <a href="<?php echo SITEURL; ?>admin/update-password.php?id=<?php echo $id; ?>" class="btn-primary">Update Password</a> 
+                                        <a href="<?php echo SITEURL; ?>admin/update-admin.php?id=<?php echo $id; ?>" class="btn-secondary">Edit Details</a> 
+                                        <a href="<?php echo SITEURL; ?>admin/delete-admin.php?id=<?php echo $id; ?>" class="btn-danger">Delete Admin</a>
+                                    </td>
                                 </tr>
 
                                 <?php
