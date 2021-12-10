@@ -137,3 +137,14 @@ table tr td {
     background-color: #ff4757;
     color: white;
 }
+
+/* CSS for Login */
+
+.login {
+    width: 20%;
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: #f1f2f6;
+    margin: 10% auto;
+    padding: 2%;
+}

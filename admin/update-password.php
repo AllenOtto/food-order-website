@@ -93,21 +93,31 @@
 
                         } else {
                             // If new password and confirm password don't match
-                            $_SESSION['pwd-mismatch'] = "<div class='error'>Password Mismatch</div>";
+                            $_SESSION['pwd-mismatch'] = "<div class='error'>Password Confirmation Failed</div>";
                             // Redirect to manage admin page
                             header('location: '.SITEURL.'admin/manage-admin.php');
                         }
 
                     } else {
-                        // User at specified ID does not have the password specified ie. wrong password for user at said ID
-                        // Save session message and redirect
-                        $_SESSION['password-update'] = "<div class='error'>Wrong Password</div>";
+                        // If password verification failed
+                        $_SESSION['password-update'] = "<div class='error'>Wrong Current Password</div>";
+                        // Redirect to manage admin page
                         header('location:'.SITEURL.'admin/manage-admin.php');
                     }
                 }
 
             }
         }
+
+
+        //Password Update session message
+        if(isset($_SESSION['password-update'])) {
+            // If password_update session variable has been assigned a message
+            echo $_SESSION['password-update'];
+            // Unset/Empty password_update session variable on page refresh
+            unset($_SESSION['password-update']);
+        } 
+
 
     ?>
 
