@@ -20,11 +20,11 @@
                     unset($_SESSION['delete']);
                 }
             
-                if(isset($_SESSION['update'])) {
+                if(isset($_SESSION['password-update'])) {
                     // If session variable has content, display it
-                    echo $_SESSION['update'];
+                    echo $_SESSION['password-update'];
                     // Remove session message on page refresh
-                    unset ($_SESSION['update']);
+                    unset ($_SESSION['password-update']);
                 }
 
                 //Password Update session message
@@ -40,13 +40,6 @@
                     echo $_SESSION['wrong-password'];
                     // unset session variable on page refresh
                     unset($_SESSION['wrong-password']);
-                }
-
-                // Wrong password for user at specified id
-                if(isset($_SESSION['pwd-mismatch'])) {
-                    echo $_SESSION['pwd-mismatch'];
-                    // unset session variable on page refresh
-                    unset($_SESSION['pwd-mismatch']);
                 }
 
             ?>

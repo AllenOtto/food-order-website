@@ -16,11 +16,6 @@
                         echo $_SESSION['login'];
                         unset($_SESSION['login']);
                     }
-
-                    if(isset($_SESSION['logout'])) {
-                        echo $_SESSION['logout'];
-                        unset($_SESSION['logout']);
-                    }
                 ?>
 
                 <!-- Login Form Starts Here -->
@@ -58,7 +53,11 @@
             // User authenticated successfully
             // Save success session message and redirect user to landing page
             $_SESSION['login'] = "<div class='success'>Welcome ".$username."</div>";
-            header('location:'.SITEURL.'admin/index.php');
+            // User Session variable checks whether a user is logged in or not. 
+            // During logout this variable is unset by session_destroy() on logout page
+            $_SESSION['user'] = $username; 
+
+            header('location:'.SITEURL.'admin/');
         } else {
             // If user not in database retain user on login page and save error session message
             $_SESSION['login'] = "<div class='error text-center'>Wrong Username or Password</div><br>";
