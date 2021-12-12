@@ -3,10 +3,18 @@
     <!-- Main Content Section Starts -->
     <div class="main-content">
         <div class="wrapper">
-            <h1>Categories</h1><br><br>
+            <h1>Categories</h1><br>
+
+            <?php
+                if(isset($_SESSION['add-category'])) {
+                    echo $_SESSION['add-category'];
+                    unset($_SESSION['add-category']);
+                }
+            ?>
             
+            <br>
             <!-- Button to add Admin -->
-            <a href="#" class="btn-primary">Add Category</a><br><br>
+            <a href="<?php echo SITEURL; ?>admin/add-category.php" class="btn-primary">Add Category</a><br><br>
 
             <table class="tbl-full">
                 <tr>

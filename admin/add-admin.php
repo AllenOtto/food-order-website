@@ -66,13 +66,13 @@
         // 4. Check whether (query is executed) data is inserted into database or not and display appropriate message
         if( $res==True ) {
             // Create a session variable to display message
-            $_SESSION['add'] = '<div class="success">Admin added Successfully</div>';
+            $_SESSION['add-admin'] = '<div class="success">Admin added Successfully</div>';
             // Redirect to Manage Admin page
             header('location:'.SITEURL.'admin/manage-admin.php');
             
         } else {
             // Create session variable to display message
-            $_SESSION['add'] = '<div class="error">Failed to add Admin</div>';
+            $_SESSION['add-admin'] = '<div class="error">Failed to add Admin</div>';
             // Redirect page to add-admin.php
             header('location:'.SITEURL.'admin/add-admin.php');   
         }

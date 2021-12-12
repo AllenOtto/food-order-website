@@ -6,25 +6,18 @@
             <h1>Manage Admins</h1><br>
 
             <?php 
-                if(isset($_SESSION['add'])) { // Checking if the session is set
+                if(isset($_SESSION['add-admin'])) { // Checking if the session is set
                     // If session is set, display session message
-                    echo $_SESSION['add'];
+                    echo $_SESSION['add-admin'];
                     // Remove session message on page refresh 
-                    unset($_SESSION['add']);
+                    unset($_SESSION['add-admin']);
                 }
 
-                if(isset($_SESSION['delete'])) {
+                if(isset($_SESSION['delete-admin'])) {
                     // If session variable has content, display it
-                    echo $_SESSION['delete'];
+                    echo $_SESSION['delete-admin'];
                     // Remove session message on page refresh
-                    unset($_SESSION['delete']);
-                }
-            
-                if(isset($_SESSION['password-update'])) {
-                    // If session variable has content, display it
-                    echo $_SESSION['password-update'];
-                    // Remove session message on page refresh
-                    unset ($_SESSION['password-update']);
+                    unset($_SESSION['delete-admin']);
                 }
 
                 //Password Update session message
