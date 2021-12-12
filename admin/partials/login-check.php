@@ -4,7 +4,7 @@
     if(!isset($_SESSION['user'])) {
         // User is not logged in.
         // Redirect to login page with message
-        $_SESSION['login-fail'] = "<div class='error'>Login Failed. Try Again</div>";
+        $_SESSION['login-bypass-attempt'] = "<div class='error text-center'>Login to access Admin Panel</div>";
         header('location:'.SITEURL.'admin/login.php');
     }
 ?>

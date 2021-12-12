@@ -7,14 +7,21 @@
     </head>
     <body>
         <div class="login">
-            <h1 class="text-center">Login</h1><br><br>
+            <h1 class="text-center">Login</h1><br>
 
             <?php
-                    if(isset($_SESSION['login'])){
-                        echo $_SESSION['login'];
-                        unset($_SESSION['login']);
+                    if(isset($_SESSION['login'])){ // If session variable has message in it
+                        echo $_SESSION['login']; // Display message
+                        unset($_SESSION['login']); // Remove message display on page refresh
+                    }
+
+                    if(isset($_SESSION['login-bypass-attempt'])) {
+                        echo $_SESSION['login-bypass-attempt'];
+                        unset($_SESSION['login-bypass-attempt']);
                     }
                 ?>
+
+                <br>
 
                 <!-- Login Form Starts Here -->
                 <form action="" method="post" class="text-center">
@@ -50,7 +57,7 @@
         if($count==1) {
             // User authenticated successfully
             // Save success session message and redirect user to landing page
-            $_SESSION['login'] = "<div class='success'>Welcome ".$username." You're Logged In.</div>";
+            $_SESSION['login'] = "<div class='success'>Welcome ".$username.". You're Logged In.</div>";
             // User Session variable checks whether a user is logged in or not. It basically Implies the start of a User Session.
             // During logout this variable is unset by session_destroy() on logout page. That implies the end of the session of user of set username.
             $_SESSION['user'] = $username; 
@@ -58,7 +65,7 @@
             header('location:'.SITEURL.'admin/');
         } else {
             // If user not in database retain user on login page and save error session message
-            $_SESSION['login'] = "<div class='error text-center'>Wrong Username or Password</div><br>";
+            $_SESSION['login'] = "<div class='error text-center'>Wrong Username or Password</div>";
             header('location:'.SITEURL.'admin/login.php');
         }
     }
