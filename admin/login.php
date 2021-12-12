@@ -1,7 +1,5 @@
 <?php include('../config/constants.php'); ?>
 
-                
-
 <html>
     <head>
         <title>Login - Food Order System</title>
@@ -44,7 +42,7 @@
         $sql = "SELECT * FROM tbl_admin WHERE username='$username' AND password='$password' ;";
 
         // Execute SQL statement
-        $res = mysqli_query($conn, $sql) or die(mysqli_error());
+        $res = mysqli_query($conn, $sql);
 
         // Check that there is exactly 1 user with said username and password
         // Count rows in result variable $res
@@ -52,9 +50,9 @@
         if($count==1) {
             // User authenticated successfully
             // Save success session message and redirect user to landing page
-            $_SESSION['login'] = "<div class='success'>Welcome ".$username."</div>";
-            // User Session variable checks whether a user is logged in or not. 
-            // During logout this variable is unset by session_destroy() on logout page
+            $_SESSION['login'] = "<div class='success'>Welcome ".$username." You're Logged In.</div>";
+            // User Session variable checks whether a user is logged in or not. It basically Implies the start of a User Session.
+            // During logout this variable is unset by session_destroy() on logout page. That implies the end of the session of user of set username.
             $_SESSION['user'] = $username; 
 
             header('location:'.SITEURL.'admin/');

@@ -61,7 +61,7 @@
         ";
         
         // 3. Execute query and save data to database 
-        $res = mysqli_query($conn, $sql) or die(mysqli_error());
+        $res = mysqli_query($conn, $sql);
 
         // 4. Check whether (query is executed) data is inserted into database or not and display appropriate message
         if( $res==True ) {
