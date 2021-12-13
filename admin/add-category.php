@@ -9,20 +9,22 @@
             <form action="" method="post">
                 <table class="tbl-30">
                     <tr>
-                        <td>Title: </td>
-                        <td><input type="text" name="title" placeholder="Enter Category Name"></td>
+                        <td>Title </td>
+                        <td><input type="text" name="title" placeholder="Category Title"></td>
                     </tr><br>
                     <tr>
-                        <td>Image Name: </td>
-                        <td><input type="text" name="image-name" placeholder="Enter Image Name"></td>
+                        <td>Featured </td>
+                        <td>
+                            <input type="radio" name="featured" value="Yes">Yes
+                            <input type="radio" name="featured" value="No">No
+                        </td>
                     </tr><br>
                     <tr>
-                        <td>Featured: </td>
-                        <td><input type="radio" name="featured"></td>
-                    </tr>
-                    <tr>
-                        <td>Active: </td>
-                        <td><input type="radio" name="active"></td>
+                        <td>Active </td>
+                        <td>
+                            <input type="radio" name="active" value="Yes">Yes
+                            <input type="radio" name="active" value="No">No
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -40,14 +42,27 @@
         if(isset($_POST['submit'])) {
             // Get table data
             $title = $_POST['title'];
-            $image_name = $_POST['image-name'];
-            $featured = $_POST['featured'];
-            $active = $_POST['active'];
+
+            // For input type radio and checkbox we need to check
+            // whether the button is checked or not. Sometimes neither 
+            // Yes or No option is checked
+            if(isset($_POST['featured'])) {
+                // Get the value if button is selected
+                $featured = $_POST['featured'];
+            } else {
+                // Give a default value if neither is selected
+                $featured = "No";
+            }
+
+            if(isset($_POST['active'])) {
+                $active = $_POST['active'];
+            } else {
+                $active = "No";
+            }
     
             // Create sql query to save category to database
             $sql = "INSERT INTO tbl_category SET
-                title='$title',
-                image_name='$image_name',
+                title='$title', 
                 featured='$featured',
                 active='$active';
             ";

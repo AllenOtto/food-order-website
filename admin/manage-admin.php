@@ -55,10 +55,10 @@
                     $sql = "SELECT * FROM tbl_admin";
                     // Execute the query
                     $res = mysqli_query($conn, $sql);
-                    // Check whether the query is executed or not and respond appropriately
-                    if($res==TRUE) {
+                    // Check whether the query is executed or not
+                    if($res==True) {
                         // Count rows to check if we have data in database or not
-                        $count = mysqli_num_rows($res); // Function to get all rows in database
+                        $count = mysqli_num_rows($res); // Function to get number of rows in database
                         
                         $sn=1;
 
@@ -68,7 +68,7 @@
                                 // Using while loop to get all data from DB
                                 // While loop will run as long as we have data in DB
 
-                                // Get individual data
+                                // Get individual data items
                                 $id=$rows['id'];
                                 $full_name=$rows['full_name'];
                                 $username=$rows['username'];
