@@ -4,12 +4,13 @@
         <div class="wrapper">
             <h1>Add Category</h1>
 
+            
             <!-- Add Category Form Starts Here -->
             <form action="" method="post">
                 <table class="tbl-30">
                     <tr>
                         <td>Title: </td>
-                        <td><input type="text" name="category" placeholder="Enter Category"></td>
+                        <td><input type="text" name="title" placeholder="Enter Category Name"></td>
                     </tr><br>
                     <tr>
                         <td>Image Name: </td>
@@ -21,7 +22,7 @@
                     </tr>
                     <tr>
                         <td>Active: </td>
-                        <td><input type="radio" name="category" placeholder="Enter Category"></td>
+                        <td><input type="radio" name="active"></td>
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -39,7 +40,7 @@
         if(isset($_POST['submit'])) {
             // Get table data
             $title = $_POST['title'];
-            $image_name = $_POST['image_name'];
+            $image_name = $_POST['image-name'];
             $featured = $_POST['featured'];
             $active = $_POST['active'];
     
