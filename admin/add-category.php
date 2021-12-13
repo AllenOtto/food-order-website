@@ -8,25 +8,27 @@
             <form action="" method="post">
                 <table class="tbl-30">
                     <tr>
-                        <td>Title</td>
-                        <td><input type="text" name="title" placeholder="Enter Title Here..."></td>
-                    </tr><br><br>
+                        <td>Title: </td>
+                        <td><input type="text" name="category" placeholder="Enter Category"></td>
+                    </tr><br>
                     <tr>
-                        <td>Image Name</td>
-                        <td><input type="text" name="image-name" placeholder="Enter Image Name Here..."></td>
-                    </tr><br><br>
+                        <td>Image Name: </td>
+                        <td><input type="text" name="image-name" placeholder="Enter Image Name"></td>
+                    </tr><br>
                     <tr>
-                        <td>Featured</td>
+                        <td>Featured: </td>
                         <td><input type="radio" name="featured"></td>
                     </tr>
                     <tr>
-                        <td>Active</td>
-                        <td><input type="radio" name="active"></td>
-                    </tr><br><br>
-                    <tr>
-                        <td colspan=2><input type="submit" name="submit" value="submit" class="btn-secondary"></td>
+                        <td>Active: </td>
+                        <td><input type="radio" name="category" placeholder="Enter Category"></td>
                     </tr>
-                </table>           
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" name="submit" value="submit" class="btn-secondary">
+                        </td>
+                    </tr>
+                </table>
             </form>
             <!-- Add Category Form Ends Here -->
 
@@ -36,11 +38,17 @@
     <?php
         if(isset($_POST['submit'])) {
             // Get table data
-            $category_name = $_POST['category_name'];
-
+            $title = $_POST['title'];
+            $image_name = $_POST['image_name'];
+            $featured = $_POST['featured'];
+            $active = $_POST['active'];
+    
             // Create sql query to save category to database
             $sql = "INSERT INTO tbl_category SET
-                category_name='$category_name'
+                title='$title',
+                image_name='$image_name',
+                featured='$featured',
+                active='$active';
             ";
             
             // Execute query
