@@ -87,6 +87,13 @@
                 // To upload image we need image name, source name and destination name
                 $image_name = $_FILES['image']['name'];
 
+                // Auto rename our image
+                // Get the image extension eg. jpg, jpeg, png etc
+                $ext = end(explode('.', $image_name));
+
+                // Rename the image
+                $image_name = "Food_Category_".rand(000,999).".".$ext;
+
                 $source_path = $_FILES['image']['tmp_name'];
 
                 $destination_path = "../images/category/".$image_name;
