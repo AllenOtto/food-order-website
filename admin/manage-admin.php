@@ -97,7 +97,7 @@
                     }
                 ?>
 
-            </table>
+            </table>    
 
             <div class="clearfix"></div>
         </div>

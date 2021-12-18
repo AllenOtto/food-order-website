@@ -60,7 +60,7 @@
             $title = $_POST['title'];
 
             // For input type radio and checkbox we need to check
-            // whether the button is checked or not. Sometimes neither 
+            // whether the button is checked or not. Sometimes neither
             // Yes or No option is checked
             if(isset($_POST['featured'])) {
                 // Get the value if button is selected
@@ -77,7 +77,7 @@
             }
 
             // Check whether image is selected or not and 
-            // set the value for image name accordignly
+            // set the value for image name accordingly
             // print_r($_FILES['image']);
 
             // die(); // Beeak the code here
