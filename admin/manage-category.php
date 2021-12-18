@@ -23,6 +23,7 @@
                     <th>image Name</th>
                     <th>Featured</th>
                     <th>Active</th>
+                    <th>Actions</th>
                 </tr>
 
                 <?php
@@ -62,6 +63,10 @@
                                     <td><?php echo $image_name ?></td>
                                     <td><?php echo $featured; ?></td>
                                     <td><?php echo $active; ?></td>
+                                    <td>
+                                        <a href="<?php echo SITEURL; ?>admin/update-admin.php?id=<?php echo $id; ?>" class="btn-secondary">Edit Details</a> 
+                                        <a href="<?php echo SITEURL; ?>admin/delete-admin.php?id=<?php echo $id; ?>" class="btn-danger">Delete Admin</a>
+                                    </td>
                                 </tr>
 
                                 <?php
