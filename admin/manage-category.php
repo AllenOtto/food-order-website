@@ -10,6 +10,16 @@
                     echo $_SESSION['add-category'];
                     unset($_SESSION['add-category']);
                 }
+
+                if(isset($_SESSION['unlink-image'])) {
+                    echo $_SESSION['unlink-image'];
+                    unset($_SESSION['unlink-image']);
+                }
+
+                if(isset($_SESSION['delete-category'])) {
+                    echo $_SESSION['delete-category'];
+                    unset($_SESSION['delete-category']);
+                }
             ?>
             
             <br><br>
