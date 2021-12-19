@@ -18,7 +18,7 @@
 
             <table class="tbl-full">
                 <tr>
-                    <th>Serial #</th>
+                    <th>SN</th>
                     <th>Title</th>
                     <th>image Name</th>
                     <th>Featured</th>
@@ -43,15 +43,16 @@
 
                         if($count>0) { // There are rows/entries in $res
                             // Get data entries in an associative array
-                            while($rows=mysqli_fetch_assoc($res)) {
+                            while($row=mysqli_fetch_assoc($res)) {
                                 // Using while loop to get all data from DB
                                 // While loop will run as long as we have data in DB
 
                                 // Get individual data items
-                                $title = $rows['title'];
-                                $image_name = $rows['image_name'];
-                                $featured = $rows['featured'];
-                                $active = $rows['active'];
+                                $id = $row['id'];
+                                $title = $row['title'];
+                                $image_name = $row['image_name'];
+                                $featured = $row['featured'];
+                                $active = $row['active'];
 
                                 // Display db entries in table
 
@@ -60,18 +61,42 @@
                                 <tr>
                                     <td><?php echo $sn++; ?>.</td>
                                     <td><?php echo $title; ?></td>
-                                    <td><?php echo $image_name ?></td>
+                                    <td>
+                                        <?php 
+                                            if($image_name!="") {
+                                                // Display image
+                                                ?>
+                                                    <img src="<?php echo SITEURL; ?>images/category/<?php echo $row['image_name']; ?>" width="100px">
+                                                <?php
+
+                                            } else {
+                                                // Display error message
+                                                echo "<div class='error'>No Image Available.</div>";
+
+                                            }
+                                        ?>
+                                    </td>
                                     <td><?php echo $featured; ?></td>
                                     <td><?php echo $active; ?></td>
                                     <td>
-                                        <a href="<?php echo SITEURL; ?>admin/update-admin.php?id=<?php echo $id; ?>" class="btn-secondary">Edit Details</a> 
-                                        <a href="<?php echo SITEURL; ?>admin/delete-admin.php?id=<?php echo $id; ?>" class="btn-danger">Delete Admin</a>
+                                        <a href="<?php echo SITEURL; ?>admin/update-category.php?id=<?php echo $id; ?>" class="btn-secondary">Edit Details</a> 
+                                        <a href="<?php echo SITEURL; ?>admin/delete-category.php?id=<?php echo $id; ?>" class="btn-danger">Delete Category</a>
                                     </td>
                                 </tr>
 
                                 <?php
 
                             }
+
+                        } else {
+                            // If we have no data in database table
+                            ?>
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="error">No Categories Added</div>
+                                    </td>
+                                </tr>
+                            <?php
                         }
                     }
 
