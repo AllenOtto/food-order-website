@@ -1,34 +1,43 @@
 <?php include('partials/menu.php'); ?>
 
     <?php
-        // Get id and image_name variables as passed in via href url
-        $id = $_GET['id'];
-        $image_name = $_GET['image_name'];
+        if(isset($_GET['id'])) {
+            // Get id and image_name variables as passed in via href url
+            $id = $_GET['id'];
+            $image_name = $_GET['image_name'];
 
-        // Create query to get selected row from database
-        $sql = "SELECT * FROM tbl_category WHERE id='$id'";
+            // Create query to get selected row from database
+            $sql = "SELECT * FROM tbl_category WHERE id='$id'; ";
 
-        // Execute query
-        $res = mysqli_query($conn, $sql);
+            // Execute query
+            $res = mysqli_query($conn, $sql);
 
-        // Check whether db query executed successfully
-        if($res==true) {
-            //Check whether data was returned from database
-            $count = mysqli_num_rows($res);
+            // Check whether db query executed successfully
+            if($res==true) {
+                //Check whether data was returned from database
+                $count = mysqli_num_rows($res);
 
-            // Check that only one row is returned 
-            if($count==1) {
-                $row = mysqli_fetch_assoc($res);
+                // Check that only one row is returned 
+                if($count==1) {
+                    $row = mysqli_fetch_assoc($res);
 
-                $title = $row['title'];
-                // $image_name = $row['image_name'];
-                $featured = $row['featured'];
-                $active = $row['active'];
+                    $title = $row['title'];
+                    $current_image = $row['image_name'];
+                    $featured = $row['featured'];
+                    $active = $row['active'];
+
+                } else {
+                    // Set session message
+                    $_SESSION['category-not-found'] = "<div class='error'>No Such Category Found</div>";
+                    // Redirect to manage category page
+                    header('location:'.SITEURL.'admin/manage-category.php');
+                }
+            }
 
             } else {
-                // Set Session message and redirect to manage category page
+                // Redirect to manage category page
+                header('location:'.SITEURL.'admin/manage-category.php');
             }
-        }
 
     ?>
 
@@ -45,7 +54,7 @@
                     </tr>
                     <tr>
                         <td>Current image</td>
-                        <td><input type="file" name="current-image" value=""></td>
+                        <td><input type="file" name="current-image" value="<?php echo $image_name; ?>"></td>
                     </tr>
                     <tr>
                         <td>New Image</td>

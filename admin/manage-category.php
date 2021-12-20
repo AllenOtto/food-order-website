@@ -20,6 +20,11 @@
                     echo $_SESSION['delete-category'];
                     unset($_SESSION['delete-category']);
                 }
+
+                if(isset($_SESSION['category-not-found'])) {
+                    echo $_SESSION['category-not-found'];
+                    unset($_SESSION['category-not-found']);
+                }
             ?>
             
             <br><br>
