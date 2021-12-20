@@ -54,7 +54,21 @@
                     </tr>
                     <tr>
                         <td>Current image</td>
-                        <td><input type="file" name="current-image" value="<?php echo $image_name; ?>"></td>
+                        <td>
+                            <?php
+                                if($current_image != "") {
+                                    // Display the image
+                                    ?>
+                                    
+                                    <img src="<?php echo SITEURL; ?>images/category/<?php echo $current_image; ?>" width="100px">
+                                    
+                                    <?php
+                                } else {
+                                    // Display message
+                                    echo "<div class='error'>Image Unavailable</div>";
+                                }
+                            ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>New Image</td>
