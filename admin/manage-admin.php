@@ -63,15 +63,15 @@
                         $sn=1;
 
                         if ($count>0) { // We have rows in DB
-                            while($rows=mysqli_fetch_assoc($res))
+                            while($row=mysqli_fetch_assoc($res))
                             { 
                                 // Using while loop to get all data from DB
                                 // While loop will run as long as we have data in DB
 
                                 // Get individual data items
-                                $id=$rows['id'];
-                                $full_name=$rows['full_name'];
-                                $username=$rows['username'];
+                                $id=$row['id'];
+                                $full_name=$row['full_name'];
+                                $username=$row['username'];
 
                                 // Display individual data items in our table
                                 ?>

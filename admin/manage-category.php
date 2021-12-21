@@ -25,6 +25,11 @@
                     echo $_SESSION['category-not-found'];
                     unset($_SESSION['category-not-found']);
                 }
+                
+                if(isset($_SESSION['upload'])) {
+                    echo $_SESSION['upload'];
+                    unset($_SESSION['upload']);
+                }
             ?>
             
             <br><br>
@@ -78,10 +83,10 @@
                                     <td><?php echo $title; ?></td>
                                     <td>
                                         <?php 
-                                            if($image_name!="") {
+                                            if($image_name != "") {
                                                 // Display image
                                                 ?>
-                                                    <img src="<?php echo SITEURL; ?>images/category/<?php echo $row['image_name']; ?>" width="100px">
+                                                    <img src="<?php echo SITEURL; ?>images/category/<?php echo $image_name; ?>" width="100px">
                                                 <?php
 
                                             } else {
