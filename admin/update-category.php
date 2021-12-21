@@ -4,7 +4,6 @@
         if(isset($_GET['id'])) {
             // Get id and image_name variables as passed in via href url
             $id = $_GET['id'];
-            $image_name = $_GET['image_name'];
 
             // Create query to get selected row from database
             $sql = "SELECT * FROM tbl_category WHERE id='$id'; ";
@@ -19,8 +18,10 @@
 
                 // Check that only one row is returned 
                 if($count==1) {
+                    // Get data in an associative array
                     $row = mysqli_fetch_assoc($res);
 
+                    // Get individual data items
                     $title = $row['title'];
                     $current_image = $row['image_name'];
                     $featured = $row['featured'];
@@ -28,7 +29,7 @@
 
                 } else {
                     // Set session message
-                    $_SESSION['category-not-found'] = "<div class='error'>No Such Category Found</div>";
+                    $_SESSION['category-not-found'] = "<div class='error'>No Such Category</div>";
                     // Redirect to manage category page
                     header('location:'.SITEURL.'admin/manage-category.php');
                 }
@@ -56,7 +57,7 @@
                         <td>Current image</td>
                         <td>
                             <?php
-                                if($current_image != "") {
+                                if($current_image != "") { // If value of current_image variable is not blank i.e If we have an image_name in database
                                     // Display the image
                                     ?>
                                     
@@ -73,7 +74,7 @@
                     <tr>
                         <td>New Image</td>
                         <td>
-                            <input type="file" name="image-name" value="<?php echo $image_name; ?>">
+                            <input type="file" name="image">
                         </td>
                     </tr>
                     <tr>
@@ -92,6 +93,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
                             <input type="submit" name="submit" value="Update Category" class="btn-secondary">
                         </td>
                     </tr>
