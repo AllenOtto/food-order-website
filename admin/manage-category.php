@@ -35,6 +35,16 @@
                     echo $_SESSION['update-category'];
                     unset($_SESSION['update-category']);
                 }
+
+                if(isset($_SESSION['image-not-selected'])) {
+                    echo $_SESSION['image-not-selected'];
+                    unset($_SESSION['image-not-selected']);
+                }
+
+                if(isset($_SESSION['remove'])) {
+                    echo $_SESSION['remove'];
+                    unset($_SESSION['remove']);
+                }
             ?>
             
             <br><br>

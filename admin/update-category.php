@@ -108,8 +108,79 @@
                 // Get form data
                 $id = $_POST['id'];
                 $title = $_POST['title'];
+                $current_name = $_POST['current_name'];
                 $featured = $_POST['featured'];
                 $active = $_POST['active'];
+
+
+                // If a new image is selected, remove current photo if one was there and replace with new one
+                // If a new image is not selected, retain the current one if there was one
+                if(isset($_FILES['image']['name'])) { // If $_FILES['image']['name] is set i.e. is not null
+                    $image_name = $_FILES['image']['name'];
+
+                    // Check that $image_name is not empty
+                    if($image_name != "") {
+                        // 1. Delete current image
+                        // 2. Upload new image
+
+                        // 1. Delete current image
+                        $path = "../images/category/".$current_image;
+                        $remove = unlink($path);
+
+                        // Check whether image was not deleted
+                        if($remove==false) {
+                            // If image was not deleted, redirect to manage category page with error message then stop process else continue
+                            $_SESSION['remove'] = "<div class='error'>Current Image deletion failed</div>";
+                            header('location:'.SITEURL.'admin/manage-category.php');
+                            // Stop process
+                            die();
+                        }
+
+                        // 2. Upload New Image
+                        // We need: a. New image name b. Source path c. Destination path
+                        // a. new image name; Auto rename our image with each database entry
+
+
+
+
+                        // AUTO RENAME IMAGE FUNCTIONALITY
+
+
+                        
+
+                        // b. Source path
+                        $source_path = $_FILES['image']['tmp_name'];
+                        // c. Destination path
+                        $destination_path = "../images/category/".$image_name;
+
+                        // Move uploaded image from source to destination 
+                        $upload = move_uploaded_file($source_path, $destination_path);
+
+                        // Check if image was not uploaded successfully
+                        if($upload==false) {
+                            // If upload failed, redirect to manage category page with error message then stop process, else continue
+                            $_SESSION['upload'] = "<div class='error'>Image failed to upload</div>";
+                            header('location:'.SITEURL.'admin/manage-category.php');
+                            // Stop process
+                            die();
+                        }
+
+                    } else {
+                        // If image name is blank, redirect with message and stop process
+                        $_SESSION['image-not-selected'] = "<div class='error'>Image not Selected</div>";
+                        header('location:'.SITEURL.'admin/manage-category.php');
+                        // Stop process
+                        die();
+
+                    }
+
+
+                } else {
+                    // If no image is selected, use current image if one exists
+                    $image_name = $current_image;
+                }
+
+
 
                 // Create sql query to update database
                 $sql2 = "UPDATE tbl_category SET
