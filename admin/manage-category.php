@@ -30,6 +30,11 @@
                     echo $_SESSION['upload'];
                     unset($_SESSION['upload']);
                 }
+
+                if(isset($_SESSION['update-category'])) {
+                    echo $_SESSION['update-category'];
+                    unset($_SESSION['update-category']);
+                }
             ?>
             
             <br><br>

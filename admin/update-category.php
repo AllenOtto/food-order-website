@@ -93,6 +93,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
+                            <input type="hidden" name="current_image" value="<?php echo $current_image; ?>">
                             <input type="hidden" name="id" value="<?php echo $id; ?>">
                             <input type="submit" name="submit" value="Update Category" class="btn-secondary">
                         </td>
@@ -102,74 +103,36 @@
 
             <?php
 
-            // Check if submit button is clicked
+            // Check whether submit button has been clicked
             if(isset($_POST['submit'])) {
                 // Get form data
                 $id = $_POST['id'];
                 $title = $_POST['title'];
-                
-                // Check if image is uploaded
-                if(isset($_FILES['image']['name'])) {
-                    // To upload image we need image name, source path and destination path
-                    // 1. Get Image Name 
-                    $image_name = $_FILES['image']['name'];
+                $featured = $_POST['featured'];
+                $active = $_POST['active'];
 
-                    if($image_name != "") { 
-                        // If $image_name is populated, then the previous image needs to be unlinked
-                        // Path to previous image
-                        $path = "../images/category/".$image_name;
-                        // Unlink image
-                        $remove = unlink($path);
-
-                        // Image uploading is only attempted if an image is selected ie. the image_name variable is populated
-                        // Rename the image to have unique names for each uploaded image
-                        // Use the expload method to isolate the image extension
-                        $ext = end(expload('.', $image_name));
-                        //Rename the image
-                        $image_name = "Food_Category_".rand(000, 999).'.'.$ext;
-
-                        // 2. Get Source Path for Image
-                        $source_path = $_FILES['image']['tmp_name'];
-                        
-                        // 3. Get destination path for image
-                        $destination_path = "../images/category/".$image_name;
-
-                        // Upload image
-                        $upload = move_uploaded_file($source_path, $destination_path);
-                    }
-
-                    
-                } else {
-                    // If none is selected display message
-                    $image_name = "";
-                }
-
-                // Check if option selected for featured
-                if(isset($_POST['featured'])) {
-                    $featured = $_POST['featured'];
-                } else {
-                    // If no option selected, give default 'No'
-                    $featured = "No";
-                }
-
-                // Check if option selected for active
-                if(isset($_POST['active'])) {
-                    $active = $_POST['active'];
-                } else {
-                    // If no option selected, give default 'No'
-                    $active = "No";
-                }
-
-                // Create SQL query to update database 
-                $sql = "UPDATE tbl_category SET
-                    title='$title',
-                    image_name='$image_name',
-                    featured='$featured',
-                    active='$active'
-                    WHERE id='$id';
+                // Create sql query to update database
+                $sql2 = "UPDATE tbl_category SET
+                    title = '$title',
+                    featured = '$featured',
+                    active = '$active'
+                    WHERE id = '$id';
                 ";
 
-                // $res = mysqli_query($conn, $sql);
+                // Execute query
+                $res2 = mysqli_query($conn, $sql2);
+
+                // Check whether query executed successfully
+                if($res2 == true) {
+                    // Redirect to manage category page with success message
+                    $_SESSION['update-category'] = "<div class='success'>Update Successfully</div>";
+                    header('location:'.SITEURL.'admin/manage-category.php');
+
+                } else {
+                    // Redirect to manage category with error message
+                    $_SESSION['update-category'] = "<div class='error'>Update Failed</div>";
+                    header('location:'.SITEURL.'admin/manage-category.php');
+                }
             }
 
             ?>
