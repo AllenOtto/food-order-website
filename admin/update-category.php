@@ -147,7 +147,7 @@
                         $ext = end(explode(".", $image_name));
 
                         // Form new image name
-                        $image_name = "Food_Category_Updated_".rand(000, 999).$ext;
+                        $image_name = "Food_Category_".rand(000, 999).$ext;
 
                         // b. Source path
                         $source_path = $_FILES['image']['tmp_name'];
