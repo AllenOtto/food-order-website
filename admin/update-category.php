@@ -120,33 +120,34 @@
 
                     // Check that $image_name is not empty
                     if($image_name != "") {
-                        // 1. Delete current image
-                        // 2. Upload new image
+                        // 1. Delete current image if it exists
 
-                        // 1. Delete current image
-                        $path = "../images/category/".$current_image;
-                        $remove = unlink($path);
+                        if($current_image != "") { 
+                            // 1. Delete current image
+                            $path = "../images/category/".$current_image;
+                            $remove = unlink($path);
 
-                        // Check whether image was not deleted
-                        if($remove==false) {
-                            // If image was not deleted, redirect to manage category page with error message then stop process else continue
-                            $_SESSION['remove'] = "<div class='error'>Current Image deletion failed</div>";
-                            header('location:'.SITEURL.'admin/manage-category.php');
-                            // Stop process
-                            die();
+                            // Check whether image was not deleted
+                            if($remove==false) {
+                                // If image was not deleted, redirect to manage category page with error message then stop process else continue
+                                $_SESSION['remove'] = "<div class='error'>Current Image deletion failed</div>";
+                                header('location:'.SITEURL.'admin/manage-category.php');
+                                // Stop process
+                                die();
+                            }
+                        } else {
+                            echo "current image is empty";
                         }
 
                         // 2. Upload New Image
                         // We need: a. New image name b. Source path c. Destination path
                         // a. new image name; Auto rename our image with each database entry
+                        // Give each image a unique random name
+                        // Get File extension
+                        $ext = end(explode(".", $image_name));
 
-
-
-
-                        // AUTO RENAME IMAGE FUNCTIONALITY
-
-
-                        
+                        // Form new image name
+                        $image_name = "Food_Category_Updated_".rand(000, 999).$ext;
 
                         // b. Source path
                         $source_path = $_FILES['image']['tmp_name'];
@@ -166,18 +167,15 @@
                         }
 
                     } else {
-                        // If image name is blank, redirect with message and stop process
-                        $_SESSION['image-not-selected'] = "<div class='error'>Image not Selected</div>";
-                        header('location:'.SITEURL.'admin/manage-category.php');
-                        // Stop process
-                        die();
+                        // If no image is selected, use current image if one exists
+                        $image_name = $current_image;
 
                     }
-
 
                 } else {
                     // If no image is selected, use current image if one exists
                     $image_name = $current_image;
+
                 }
 
 
@@ -186,6 +184,7 @@
                 $sql2 = "UPDATE tbl_category SET
                     title = '$title',
                     featured = '$featured',
+                    image_name = '$image_name',
                     active = '$active'
                     WHERE id = '$id';
                 ";
