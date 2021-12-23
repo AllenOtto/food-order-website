@@ -3,7 +3,7 @@
     <!-- Main Content Section Starts -->
     <div class="main-content">
         <div class="wrapper">
-            <h1>Categories</h1><br>
+            <h1>Manage Categories</h1><br>
 
             <?php
                 if(isset($_SESSION['add-category'])) {
