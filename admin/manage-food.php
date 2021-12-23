@@ -6,7 +6,7 @@
             <h1>Food</h1><br><br>
             
             <!-- Button to add Admin -->
-            <a href="#" class="btn-primary">Add Food</a><br><br>
+            <a href="<?php echo SITEURL; ?>admin/add-food.php" class="btn-primary">Add Food</a><br><br>
 
             <table class="tbl-full">
                 <tr>
