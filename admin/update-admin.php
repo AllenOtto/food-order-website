@@ -13,27 +13,23 @@
 
                 // Execute the query
                 $res = mysqli_query($conn, $sql);
+                
+                // Check whether we have data or not
+                $count = mysqli_num_rows($res);
 
-                // Check if the query has been executed
-                if($res==true) {
-                    // Check whether we have data or not
-                    $count = mysqli_num_rows($res);
+                // Confirm that we have exactly one result
+                if($count==1) {
+                    // Get the result in an associative array
+                    $row = mysqli_fetch_assoc($res);
 
-                    // Confirm that we have exactly one result
-                    if($count==1) {
-                        // Get the result in an associative array
-                        $row = mysqli_fetch_assoc($res);
+                    // Get indiviadual data items from associative array
+                    $full_name = $row['full_name'];
+                    $username = $row['username'];
 
-                        // Get indiviadual data items from associative array
-                        $full_name = $row['full_name'];
-                        $username = $row['username'];
-
-                    } else {
-                        // If we recieve no data, Redirect back to manage-admin.php
-                        header('location:'.SITEURL.'admin/manage-admin.php');
-                    }
+                } else {
+                    // If we recieve no data, Redirect back to manage-admin.php
+                    header('location:'.SITEURL.'admin/manage-admin.php');
                 }
-
             ?>
 
             <!-- Update form with content to be updated loaded from DB -->
