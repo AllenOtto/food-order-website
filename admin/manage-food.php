@@ -28,69 +28,57 @@
                     <th>Active</th>
                     <th>Action</th>
                 </tr>
-                <tr>
-                    <?php
-                        // Create sql query to Get All Food Items from DB
-                        $sql = "SELECT * FROM tbl_food";
-                        // Execute query
-                        $res = mysqli_query($conn, $sql);
-                        
-                        // Create counter for row numbering
-                        $sn=1;
-
-                        // Check whether query executed successfully
-                        if($res==True) {
-                            // Check that there is data in database 
-                            $count = mysqli_num_rows($res);
-                            if($count>0) {
-                                // There is data in database
-                                while($row=mysqli_fetch_assoc($res)) {
-                                    // Get data
-                                    $title = $row['title'];
-                                    $price = $row['price'];
-                                    $image_name = $row['image_name'];
-                                    $featured = $row['featured'];
-                                    $active = $row['active'];
-
-                                ?>
-
-                                    <td><?php echo $sn++; ?></td>
-                                    <td><?php echo $title; ?></td>
-                                    <td><?php echo $price; ?></td>
-                                    <td>
-                                        <?php 
-                                            if($image_name != "") {
-                                                // Image is available
-                                                ?>
-                                                    <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" width="100px">
-                                                <?php
-                                            } else {
-                                                ?>
-                                                    <div class="error">No Image Available</div>
-                                                <?php
-                                            }
-                                        ?>
-                                    </td>
-                                    <td><?php echo $featured; ?></td>
-                                    <td><?php echo $active; ?></td>
-                                    <td><a href="#" class="btn-secondary">Edit Details</a> <a href="#" class="btn-danger">Delete Admin</a></td>
-                                    
-                                <?php
-
-                                }
-                            } else {
-                                // No data in database
-                                // Display error message
-                                ?>
-                                
-                                    <td><div class='error'>No Data in Database</div></td>
-                                
-                                <?php
-                            }
-                        }
-                    ?>
+                
+                <?php
+                    // Create sql query to get all food from database
+                    $sql = "SELECT * FROM tbl_food; ";
                     
-                </tr>
+                    // Execute query
+                    $res = mysqli_query($conn, $sql);
+                    
+                    // Count rows to check whether there is food or not
+                    $count = mysqli_num_rows($res);
+
+                    // Create count variable to number food list items
+                    $sn = 1;
+
+                    if($count>0) {
+                        // We have food in database
+                        // Get the food from database
+                        while($row=mysqli_fetch_assoc($res)) {
+                            // Get individual food data items
+                            $id = $row['id'];
+                            $title = $row['title'];
+                            $price = $row['price'];
+                            $image_name = $row['image_name'];
+                            $featured = $row['featured'];
+                            $active = $row['active'];
+
+                            ?>
+
+                            <tr>
+                                <td><?php echo $sn++; ?></td>
+                                <td><?php echo $title; ?></td>
+                                <td><?php echo $price; ?></td>
+                                <td><img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" width='100px'></td>
+                                <td><?php echo $featured; ?></td>
+                                <td><?php echo $active; ?></td>
+                                <td>
+                                    <a href="<?php echo SITEURL; ?>admin/update-food.php?id=<?php echo $id; ?>" class="btn-secondary">Edit Details</a> 
+                                    <a href="<?php echo SITEURL; ?>admin/delete-food.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>" class="btn-danger">Delete Category</a>
+                                </td>
+                            </tr>
+
+                            <?php
+
+                        }
+
+                    } else {
+                        // There is no food added in database
+                        echo "<tr><td colspan='7' class='error'>Food Not Added Yet</td></tr>";
+                    }
+
+                ?>
             </table>
 
             <div class="clearfix"></div>
