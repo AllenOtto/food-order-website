@@ -7,7 +7,7 @@
 
             <table class="tbl-full">
                 <tr>
-                    <th>Serial #</th>
+                    <th>S.N.</th>
                     <th>Full Name</th>
                     <th>Username</th>
                     <th>Actions</th>

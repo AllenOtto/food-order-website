@@ -53,7 +53,7 @@
 
             <table class="tbl-full">
                 <tr>
-                    <th>SN</th>
+                    <th>S.N.</th>
                     <th>Title</th>
                     <th>image Name</th>
                     <th>Featured</th>
