@@ -22,7 +22,7 @@
                 <tr>
                     <th>S.N.</th>
                     <th>Title</th>
-                    <th>Description</th>
+                    <th>Price</th>
                     <th>Image</th>
                     <th>Featured</th>
                     <th>Active</th>
@@ -47,7 +47,7 @@
                                 while($row=mysqli_fetch_assoc($res)) {
                                     // Get data
                                     $title = $row['title'];
-                                    $description = $row['description'];
+                                    $price = $row['price'];
                                     $image_name = $row['image_name'];
                                     $featured = $row['featured'];
                                     $active = $row['active'];
@@ -56,7 +56,7 @@
 
                                     <td><?php echo $sn++; ?></td>
                                     <td><?php echo $title; ?></td>
-                                    <td><?php echo $description; ?></td>
+                                    <td><?php echo $price; ?></td>
                                     <td>
                                         <?php 
                                             if($image_name != "") {
