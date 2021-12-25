@@ -39,7 +39,7 @@
                     // Count rows to check whether there is food or not
                     $count = mysqli_num_rows($res);
 
-                    // Create count variable to number food list items
+                    // Create count variable to number food list items. Set default value as 1.
                     $sn = 1;
 
                     if($count>0) {
@@ -60,12 +60,27 @@
                                 <td><?php echo $sn++; ?></td>
                                 <td><?php echo $title; ?></td>
                                 <td><?php echo $price; ?></td>
-                                <td><img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" width='100px'></td>
+                                <td>
+                                    <?php
+                                        // Check whether we have an image or not
+                                        if($image_name != "") {
+                                            // If there is an image added for this food item
+                                            ?>
+                                                <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" width='100px'>
+                                            <?php
+
+                                        } else {
+                                            // If there is no image
+                                            echo "<div class='error'>No Image Available</div>";
+                                        }
+                                    ?>
+                                    
+                                </td>
                                 <td><?php echo $featured; ?></td>
                                 <td><?php echo $active; ?></td>
                                 <td>
                                     <a href="<?php echo SITEURL; ?>admin/update-food.php?id=<?php echo $id; ?>" class="btn-secondary">Edit Details</a> 
-                                    <a href="<?php echo SITEURL; ?>admin/delete-food.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>" class="btn-danger">Delete Category</a>
+                                    <a href="<?php echo SITEURL; ?>admin/delete-food.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>" class="btn-danger">Delete Food</a>
                                 </td>
                             </tr>
 
