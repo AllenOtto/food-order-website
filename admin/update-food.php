@@ -165,7 +165,7 @@
                         // Fetch image extension for reuse
                         $ext = end(explode(".", $image_name));
 
-                        $image_name = "Food_Item_".rand(0000,9999).".".$ext;
+                        $image_name = "Food_Item_".rand(000,999).".".$ext;
 
                         // To upload it we need its source path, its destination path and its name
                         $source_path = $_FILES['image']['tmp_name'];
@@ -191,9 +191,9 @@
                     $sql3 = "UPDATE tbl_food SET
                         title='$title',
                         description='$description',
-                        price='$price',
+                        price=$price,
                         image_name='$image_name',
-                        category_id='$category_id',
+                        category_id=$category_id,
                         featured='$featured',
                         active='$active'
                         WHERE id=$id_db;

@@ -22,6 +22,16 @@
                 unset($_SESSION['delete-food']);
             }
 
+            if(isset($_SESSION['failed-to-delete-current-image'])) {
+                echo $_SESSION['failed-to-delete-current-image'];
+                unset($_SESSION['failed-to-delete-current-image']);
+            }
+
+            if(isset($_SESSION['new-image-upload-failed'])) {
+                echo $_SESSION['new-image-upload-failed'];
+                unset($_SESSION['new-image-upload-failed']);
+            }
+
             ?>
             
             <br><br>
