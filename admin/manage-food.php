@@ -11,6 +11,16 @@
                 echo $_SESSION['add-food']; // Display session message
                 unset($_SESSION['add-food']); // Remove session message on page refresh
             }
+            
+            if(isset($_SESSION['delete-food-image'])) {
+                echo $_SESSION['delete-food-image'];
+                unset($_SESSION['delete-food-image']);
+            }
+
+            if(isset($_SESSION['delete-food'])) {
+                echo $_SESSION['delete-food'];
+                unset($_SESSION['delete-food']);
+            }
 
             ?>
             
