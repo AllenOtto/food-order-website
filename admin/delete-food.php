@@ -5,11 +5,10 @@
     if(isset($_GET['id']) AND isset($_GET['image_name'])) {
         // Get id and image_name from food item delete button on food manage page
         $id = $_GET['id'];
+        $image_name = $_GET['image_name'];
 
         // Check if there is an image associated with the food item of said id
         if($image_name != "") { // If there is, take the image name so you can to delete the image
-            $image_name = $_GET['image_name'];
-
             // To delete image, we need the path to the image and the image name
             $path = "../images/food/".$image_name;
             // Delete the image from food folder
