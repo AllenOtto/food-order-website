@@ -210,6 +210,31 @@
                         // Set image_name variable to previous image value
                         $image_name = $current_image;
                     }
+
+                    // Upload Data to database
+                    // Create sql query to update database
+                    $sql3 = "UPDATE tbl_food SET
+                        title = '$title',
+                        description = '$description',
+                        price = $price,
+                        image_name = '$image_name',
+                        category_id = $category_id,
+                        featured = '$featured',
+                        active = '$active'
+                        WHERE id=$id;
+                    ";
+
+                    // Execute query
+                    $res3 = mysqli_query($conn, $sql3);
+
+                    // Check whether query executed successfully
+                    if($res3 == true) {
+                        echo "Success";
+                    } else {
+                        echo "Fail";
+                    }
+
+
                 }
 
             ?>
