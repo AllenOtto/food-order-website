@@ -22,14 +22,14 @@
                 unset($_SESSION['delete-food']);
             }
 
-            if(isset($_SESSION['delete-current-image'])) {
-                echo $_SESSION['delete-current-image'];
-                unset($_SESSION['delete-current-image']);
+            if(isset($_SESSION['failed-to-delete-current-image'])) {
+                echo $_SESSION['failed-to-delete-current-image'];
+                unset($_SESSION['failed-to-delete-current-image']);
             }
 
-            if(isset($_SESSION['image-upload-failed'])) {
-                echo $_SESSION['image-upload-failed'];
-                unset($_SESSION['image-upload-failed']);
+            if(isset($_SESSION['image-upload'])) {
+                echo $_SESSION['image-upload'];
+                unset($_SESSION['image-upload']);
             }
 
             ?>

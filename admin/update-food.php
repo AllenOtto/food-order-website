@@ -79,11 +79,11 @@
                                         // Get data as an associative array for all data in database and populate table
                                         while($row2=mysqli_fetch_assoc($res2)) {
                                             // Get data items
-                                            $id_category = $row2['id'];
-                                            $title_category = $row2['title'];
+                                            $category_id = $row2['id'];
+                                            $category_title = $row2['title'];
 
                                             ?>
-                                                <option value="<?php echo $id_category; ?>"><?php echo $title_category; ?></option>
+                                                <option value="<?php echo $category_id; ?>"><?php echo $category_title; ?></option>
                                             <?php
 
                                         }
@@ -120,7 +120,7 @@
             </form>
 
             <?php
-            
+
                 // Check that the submit button is clicked
                 if(isset($_POST['submit'])) {
                     //Get post data
@@ -133,10 +133,83 @@
                     $description = $_POST['description'];
                     $price = $_POST['price'];
                     $current_image = $_POST['current_image'];
-                    $category_id = $_POST['category_id'];
-                    $featured = $_POST['featured'];
-                    $active = $_POST['active'];
+                    $category_id = $_POST['category'];
 
+                    // Check if featured and active have been assigned values 
+                    // If not give default value of No
+                    if(isset($_POST['featured'])) {
+                        $featured = $_POST['featured'];
+                    } else {
+                        $featured = "No";
+                    }
+
+                    if(isset($_POST['featured'])) {
+                        $active = $_POST['active'];
+                    } else {
+                        $active = "No";
+                    }
+
+                    // Work on image upload if there is an image to be uploaded
+                    // Check that the image variable is not null
+                    if(isset($_FILES['image']['name'])) {
+                        // if it is set assign it to the $image_name variable
+                        $image_name = $_FILES['image']['name'];
+
+                        // Check that the image_name variable is not empty
+                        if($image_name != "") {
+                            // Since a new image has been selected for updating
+                            // Check if there was an image previously allocated this space
+                            // If yes, delete it and replace it with new image
+                            if($current_image != "") {
+                                // There is a current image: Unlink it
+                                // To delete current image we need the path to it
+                                $path = "../images/food/".$current_image;
+                                // Unlink it
+                                $remove = unlink($path);
+                                // Check whether unlinking failed. If not proceed.
+                                if($remove == false) {
+                                    // If it failed: Redirect to manage food page with error message and stop the process
+                                    $_SESSION['failed-to-delete-current-image'] = "<div class='error'>Failed to Delete Current Image</div>";
+                                    // Redirect to manage food page
+                                    header('location:'.SITEURL.'admin/manage-food.php');
+                                    // Stop process
+                                    die();
+                                }
+
+                            }
+
+                            // If either there is no current image or image deletion was successful
+                            // Upload new image to images/food folder
+                            // To uplad new image we need the image name, path to image source (temp) and path to destination folder
+                            // Randomize image name to prevent potential overwrite due to same name in destination folder
+                            // Get file extension first
+                            $extension = end(explode(".", $image_name));
+                            // New Image Name
+                            $image_name = "Food_Item_".rand(000,999).".".$extension;
+                            // Path to image source
+                            $source_path = $_FILES['image']['tmp_name'];
+                            // Path to destination folder
+                            $destination_path = "../images/food/".$image_name;
+                            // Move image from temporary source folder to destination folder
+                            $upload = move_uploaded_file($source_path, $destination_path);
+                            // Check if image upload failed else proceed.
+                            // If it did fail, stop the process and redirect to manage food page with error message
+                            if($upload == false) {
+                                $_SESSION['image-upload'] = "<div class='error'>Image Upload Failed</div>";
+                                header('location:'.SITEURL.'admin/manage-food.php');
+                                die();
+                            }
+
+                        
+                        } else {
+                            // Set image_name variable to previous image value
+                            $image_name = $current_image;
+                        }
+                    
+                    } else {
+                        // Set image_name variable to previous image value
+                        $image_name = $current_image;
+                    }
                 }
 
             ?>
