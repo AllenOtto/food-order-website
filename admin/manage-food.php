@@ -32,6 +32,11 @@
                 unset($_SESSION['image-upload']);
             }
 
+            if(isset($_SESSION['update-food'])) {
+                echo $_SESSION['update-food'];
+                unset($_SESSION['update-food']);
+            }
+
             ?>
             
             <br><br>

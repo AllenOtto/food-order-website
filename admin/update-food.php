@@ -229,9 +229,17 @@
 
                     // Check whether query executed successfully
                     if($res3 == true) {
-                        echo "Success";
+                        // It's successful
+                        // Redirect to Manage Food page with success message 
+                        $_SESSION['update-food'] = "<div class='success'>Food Updated Successfully</div>";
+                        header('location:'.SITEURL.'admin/manage-food.php');
+
                     } else {
-                        echo "Fail";
+                        // It Failed
+                        // Redirect to Manage Food page with error message
+                        $_SESSION['update-food'] = "<div class='error'>Food Failed to Update</div>";
+                        header('location:'.SITEURL.'admin/manage-food.php');
+
                     }
 
 
