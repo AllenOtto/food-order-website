@@ -2,11 +2,11 @@
 
     <?php
         if(isset($_GET['id'])) {
-            // Get id and image_name variables as passed in via href url
+            // Get id variable as passed in via manage category update button
             $id = $_GET['id'];
 
             // Create query to get selected row from database
-            $sql = "SELECT * FROM tbl_category WHERE id='$id'; ";
+            $sql = "SELECT * FROM tbl_category WHERE id=$id; ";
 
             // Execute query
             $res = mysqli_query($conn, $sql);
@@ -119,6 +119,7 @@
                     $image_name = $_FILES['image']['name'];
 
                     // Check that $image_name is not empty
+                    // That we have a new image to replace the old one with
                     if($image_name != "") {
                         // 1. Delete current image if it exists
 
