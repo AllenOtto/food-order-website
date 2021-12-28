@@ -29,7 +29,11 @@
             $active = $row['active'];
 
         }
-    } 
+    
+    } else {
+        // If id variable is not set redirect to manage food page
+        header('location:'.SITEURL.'admin/manage-food.php');
+    }
 
 ?>
 
@@ -63,7 +67,7 @@
                                         <img src="<?php echo SITEURL; ?>images/food/<?php echo $current_image; ?>" width="100px">
                                     <?php
                                 } else {
-                                    echo "<div class='error'>Kindly Add Associated Image</div>";
+                                    echo "<div class='error'>Add Image Please</div>";
                                 }
                             ?>
                         </td>
@@ -96,6 +100,11 @@
 
                                         }
                                         
+                                    } else {
+                                        // No Categories Added
+                                        ?>
+                                            <option value="0" class="error">Add Categories to Database</option>
+                                        <?php
                                     }
 
                                 ?>

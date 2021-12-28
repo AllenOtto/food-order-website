@@ -96,7 +96,7 @@
 
                                         } else {
                                             // If there is no image
-                                            echo "<div class='error'>No Image Available</div>";
+                                            echo "<div class='error'>Add Image Please</div>";
                                         }
                                     ?>
                                     

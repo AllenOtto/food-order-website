@@ -66,7 +66,7 @@
                                     <?php
                                 } else {
                                     // Display message
-                                    echo "<div class='error'>Image Unavailable</div>";
+                                    echo "<div class='error'>Add Image Please</div>";
                                 }
                             ?>
                         </td>
