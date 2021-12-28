@@ -57,7 +57,15 @@
                     <tr>
                         <td>Current Image</td>
                         <td>
-                            <img src="<?php echo SITEURL; ?>images/food/<?php echo $current_image; ?>" width="100px">
+                            <?php
+                                if($current_image != "") {
+                                    ?>
+                                        <img src="<?php echo SITEURL; ?>images/food/<?php echo $current_image; ?>" width="100px">
+                                    <?php
+                                } else {
+                                    echo "<div class='error'>Kindly Add Associated Image</div>";
+                                }
+                            ?>
                         </td>
                     </tr>
                     <tr>
