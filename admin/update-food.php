@@ -1,7 +1,5 @@
 <?php include('partials/menu.php'); ?>
-
 <?php
-
     // Get id of row to be updated (if update food button on manage food page is set)
     if(isset($_GET['id'])) {
         $id = $_GET['id'];
@@ -24,7 +22,7 @@
             $description = $row['description'];
             $price = $row['price'];
             $current_image = $row['image_name'];
-            $category_id = $row['category_id'];
+            $current_category = $row['category_id'];
             $featured = $row['featured'];
             $active = $row['active'];
 
@@ -34,9 +32,7 @@
         // If id variable is not set redirect to manage food page
         header('location:'.SITEURL.'admin/manage-food.php');
     }
-
 ?>
-
     <div class="main-content">
         <div class="wrapper">
             <h1>Update Food</h1><br><br>
@@ -93,22 +89,17 @@
                                             // Get data items
                                             $category_id = $row2['id'];
                                             $category_title = $row2['title'];
-
                                             ?>
-                                                <option value="<?php echo $category_id; ?>"><?php echo $category_title; ?></option>
+                                                <option <?php if($current_category == $category_id) { echo "selected"; } ?> value="<?php echo $category_id; ?>"><?php echo $category_title; ?></option>
                                             <?php
-
                                         }
-                                        
                                     } else {
                                         // No Categories Added
                                         ?>
                                             <option value="0" class="error">Add Categories to Database</option>
                                         <?php
                                     }
-
                                 ?>
-                                
                             </select>
                         </td>
                     </tr>
@@ -128,16 +119,14 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input type="hidden" name="id" value="<?php echo $id ?>">
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
                             <input type="hidden" name="current_image" value="<?php echo $current_image; ?>">
                             <input type="submit" name="submit" value="Update Food" class="btn-secondary">
                         </td>
                     </tr>
                 </table>
             </form>
-
             <?php
-
                 // Check that the submit button is clicked
                 if(isset($_POST['submit'])) {
                     //Get post data
@@ -250,22 +239,16 @@
                         // Redirect to Manage Food page with success message 
                         $_SESSION['update-food'] = "<div class='success'>Food Updated Successfully</div>";
                         header('location:'.SITEURL.'admin/manage-food.php');
-
                     } else {
                         // It Failed
                         // Redirect to Manage Food page with error message
                         $_SESSION['update-food'] = "<div class='error'>Food Failed to Update</div>";
                         header('location:'.SITEURL.'admin/manage-food.php');
-
                     }
 
 
                 }
-
             ?>
-
         </div>
-
     </div>
-    
 <?php include('partials/footer.php'); ?>
