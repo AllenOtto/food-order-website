@@ -137,7 +137,7 @@
                                 die();
                             }
                         } else {
-                            echo "current image is empty";
+                            // If current image is blank, do nothing
                         }
 
                         // 2. Upload New Image

@@ -22,9 +22,9 @@
                 unset($_SESSION['delete-food']);
             }
 
-            if(isset($_SESSION['image-upload'])) {
-                echo $_SESSION['image-upload'];
-                unset($_SESSION['image-upload']);
+            if(isset($_SESSION['upload'])) {
+                echo $_SESSION['upload'];
+                unset($_SESSION['upload']);
             }
 
             if(isset($_SESSION['update-food'])) {

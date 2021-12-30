@@ -130,6 +130,8 @@
         </div>
     </div>
 
+<?php include('partials/footer.php'); ?>
+
 <?php
     // Check whether submit button is clicked
     if(isset($_POST['submit'])) {
@@ -138,15 +140,16 @@
         $description = $_POST['description'];
         $price = $_POST['price'];
         $current_image = $_POST['current_image'];
-        $category_id = $_POST['category'];
+        $category = $_POST['category'];
         $featured = $_POST['featured'];
         $active = $_POST['active'];
 
-        // Check if a new image has been added
+        // Check if a new image upload has been clicked
         if(isset($_FILES['image']['name'])) {
             // A new image has been selected 
             $image_name = $_FILES['image']['name'];
 
+            // Check whether we have an image name in variable
             if($image_name != "") {
                 // Delete previous image if it exists
                 if($current_image != "") {
@@ -189,7 +192,7 @@
                 if($upload==false) {
                     // File failed to upload
                     //Set session error message, redirect and stop process
-                    $_SESSION['image-upload'] = "<div class='error'>Image Failed to Upload</div>";
+                    $_SESSION['upload'] = "<div class='error'>Image Failed to Upload</div>";
                     header('location:'.SITEURL.'admin/manage-food.php');
                     die();
 
@@ -199,7 +202,38 @@
                 // Retain current image
                 $image_name = $current_image;
             }
-        }    
-    }       
-?>
-<?php include('partials/footer.php'); ?>
+        
+        } else {
+            // If no image is selected, retain current image
+            $image_name = $current_image;
+        }
+        
+        // If there is no new image, or new image uploaded successfully...
+        // Update Database
+        // Write sql query to update database
+        $sql3 = "UPDATE tbl_food SET
+            title='$title',
+            description='$description',
+            price=$price,
+            image_name='$image_name',
+            category_id='$category',
+            featured='$featured',
+            active='$active'
+            WHERE id=$id;
+        ";
+
+        // Execute query
+        $res3 = mysqli_query($conn, $sql3);
+
+        // Check whether query executed successfully or not
+        if($res3==True) {
+            // If it did, redirect to manage food page with session success message
+            $_SESSION['update-food'] = "<div class='success'>Food Updated Successfully</div>";
+            header('location:'.SITEURL.'admin/manage-food.php');
+        } else {
+            // If it did not, redirect to manage food page with session error message
+            $_SESSION['update-food'] = "<div class='error'>Update Food</div>";
+            header('location:'.SITEURL.'admin/manage-food.php');
+        }
+
+    }

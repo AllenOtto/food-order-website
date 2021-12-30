@@ -1,4 +1,6 @@
 <?php
+    // A solution to the error "Cannot modify headers blah blah blah"
+    ob_start();
     // Start session
     session_start();
 
