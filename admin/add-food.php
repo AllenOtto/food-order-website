@@ -120,7 +120,7 @@
                     // Get image extension from $image_name
                     $ext = end(explode(".", $image_name)); 
                     // Rename the image and give it a randomness so that uploaded images don't override in destination folder
-                    $image_name = "Food_Item_".rand(000, 999).".".$ext;
+                    $image_name = "food-item-".rand(000,999).".".$ext;
                     // Get source path
                     $source_path = $_FILES['image']['tmp_name'];
                     // Get destination path

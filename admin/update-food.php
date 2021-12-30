@@ -126,129 +126,80 @@
                     </tr>
                 </table>
             </form>
-            <?php
-                // Check that the submit button is clicked
-                if(isset($_POST['submit'])) {
-                    //Get post data
-                    // Passed hidden
-                    $id = $_POST['id'];
-                    $current_image = $_POST['current_image'];
-
-                    // Passed normally
-                    $title = $_POST['title'];
-                    $description = $_POST['description'];
-                    $price = $_POST['price'];
-                    $current_image = $_POST['current_image'];
-                    $category_id = $_POST['category'];
-
-                    // Check if featured and active have been assigned values 
-                    // If not give default value of No
-                    if(isset($_POST['featured'])) {
-                        $featured = $_POST['featured'];
-                    } else {
-                        $featured = "No";
-                    }
-
-                    if(isset($_POST['featured'])) {
-                        $active = $_POST['active'];
-                    } else {
-                        $active = "No";
-                    }
-
-                    // Work on image upload if there is an image to be uploaded
-                    // Check that the image variable is not null
-                    if(isset($_FILES['image']['name'])) {
-                        // if it is set assign it to the $image_name variable
-                        $image_name = $_FILES['image']['name'];
-
-                        // Check that the image_name variable is not empty
-                        if($image_name != "") {
-                            // Since a new image has been selected for updating
-                            // Check if there was an image previously allocated this space
-                            // If yes, delete it and replace it with new image
-                            if($current_image != "") {
-                                // There is a current image: Unlink it
-                                // To delete current image we need the path to it
-                                $path = "../images/food/".$current_image;
-                                // Unlink it
-                                $remove = unlink($path);
-                                // Check whether unlinking failed. If not proceed.
-                                if($remove == false) {
-                                    // If it failed: Redirect to manage food page with error message and stop the process
-                                    $_SESSION['failed-to-delete-current-image'] = "<div class='error'>Failed to Delete Current Image</div>";
-                                    // Redirect to manage food page
-                                    header('location:'.SITEURL.'admin/manage-food.php');
-                                    // Stop process
-                                    die();
-                                }
-
-                            }
-
-                            // If either there is no current image or image deletion was successful
-                            // Upload new image to images/food folder
-                            // To uplad new image we need the image name, path to image source (temp) and path to destination folder
-                            // Randomize image name to prevent potential overwrite due to same name in destination folder
-                            // Get file extension first
-                            $extension = end(explode(".", $image_name));
-                            // New Image Name
-                            $image_name = "Food_Item_".rand(000,999).".".$extension;
-                            // Path to image source
-                            $source_path = $_FILES['image']['tmp_name'];
-                            // Path to destination folder
-                            $destination_path = "../images/food/".$image_name;
-                            // Move image from temporary source folder to destination folder
-                            $upload = move_uploaded_file($source_path, $destination_path);
-                            // Check if image upload failed else proceed.
-                            // If it did fail, stop the process and redirect to manage food page with error message
-                            if($upload == false) {
-                                $_SESSION['image-upload'] = "<div class='error'>Image Upload Failed</div>";
-                                header('location:'.SITEURL.'admin/manage-food.php');
-                                die();
-                            }
-
-                        
-                        } else {
-                            // Set image_name variable to previous image value
-                            $image_name = $current_image;
-                        }
-                    
-                    } else {
-                        // Set image_name variable to previous image value
-                        $image_name = $current_image;
-                    }
-
-                    // Upload Data to database
-                    // Create sql query to update database
-                    $sql3 = "UPDATE tbl_food SET
-                        title = '$title',
-                        description = '$description',
-                        price = $price,
-                        image_name = '$image_name',
-                        category_id = $category_id,
-                        featured = '$featured',
-                        active = '$active'
-                        WHERE id=$id;
-                    ";
-
-                    // Execute query
-                    $res3 = mysqli_query($conn, $sql3);
-
-                    // Check whether query executed successfully
-                    if($res3 == true) {
-                        // It's successful
-                        // Redirect to Manage Food page with success message 
-                        $_SESSION['update-food'] = "<div class='success'>Food Updated Successfully</div>";
-                        header('location:'.SITEURL.'admin/manage-food.php');
-                    } else {
-                        // It Failed
-                        // Redirect to Manage Food page with error message
-                        $_SESSION['update-food'] = "<div class='error'>Food Failed to Update</div>";
-                        header('location:'.SITEURL.'admin/manage-food.php');
-                    }
-
-
-                }
-            ?>
+            
         </div>
     </div>
+
+<?php
+    // Check whether submit button is clicked
+    if(isset($_POST['submit'])) {
+        $id = $_POST['id'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $price = $_POST['price'];
+        $current_image = $_POST['current_image'];
+        $category_id = $_POST['category'];
+        $featured = $_POST['featured'];
+        $active = $_POST['active'];
+
+        // Check if a new image has been added
+        if(isset($_FILES['image']['name'])) {
+            // A new image has been selected 
+            $image_name = $_FILES['image']['name'];
+
+            if($image_name != "") {
+                // Delete previous image if it exists
+                if($current_image != "") {
+                    // Delete current image
+                    // To delete an image we need its name and the path to its current folder
+                    $path = "../images/food/".$current_image;
+                    // Delete current image
+                    $remove = unlink($path);
+                    // Check whether there's been any error in deletion
+                    if($remove==false) {
+                        // File deletion failed
+                        //Set session error message, redirect and stop process
+                        $_SESSION['image-deletion'] = "<div class='error'>Image Deletion Failed</div>";
+                        header('location:'.SITEURL.'admin/manage-food.php');
+                        die();
+                    }
+
+                } else {
+                    // If there is no current image, do nothing
+                }
+
+
+                // As there is a new image, upload it
+                // To upload an image we need its name, its source_path and its destination_path
+                // 1. Image Name: The new image name needs to be randomized so that there is no
+                // Conflict in the destination folder leading to overwriting of images already present in destination folder
+                // First get image extension
+                $extension = end(explode(".", $image_name));
+                // Randomize and rename
+                $image_name = "food-item-".rand(000,999).".".$extension;
+                // Image source_path
+                $source_path = $_FILES['image']['tmp_name'];
+                // Image destination_path
+                $destination_path = "../images/food/".$image_name;
+                // Upload file to appropriate food images folder
+                $upload = move_uploaded_file($source_path, $destination_path);
+                
+                // Check if there was any error during image upload
+                // If there was stop the process, set a session error message and redirect to food management page
+                if($upload==false) {
+                    // File failed to upload
+                    //Set session error message, redirect and stop process
+                    $_SESSION['image-upload'] = "<div class='error'>Image Failed to Upload</div>";
+                    header('location:'.SITEURL.'admin/manage-food.php');
+                    die();
+
+                }
+
+            } else {
+                // Retain current image
+                $image_name = $current_image;
+            }
+        }    
+    }       
+?>
 <?php include('partials/footer.php'); ?>

@@ -12,19 +12,14 @@
                 unset($_SESSION['add-food']); // Remove session message on page refresh
             }
             
-            if(isset($_SESSION['delete-food-image'])) {
-                echo $_SESSION['delete-food-image'];
-                unset($_SESSION['delete-food-image']);
+            if(isset($_SESSION['image-deletion'])) {
+                echo $_SESSION['image-deletion'];
+                unset($_SESSION['image-deletion']);
             }
 
             if(isset($_SESSION['delete-food'])) {
                 echo $_SESSION['delete-food'];
                 unset($_SESSION['delete-food']);
-            }
-
-            if(isset($_SESSION['failed-to-delete-current-image'])) {
-                echo $_SESSION['failed-to-delete-current-image'];
-                unset($_SESSION['failed-to-delete-current-image']);
             }
 
             if(isset($_SESSION['image-upload'])) {
