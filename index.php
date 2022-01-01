@@ -1,3 +1,5 @@
+<?php include('config/constants.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,13 +25,13 @@
             <div class="menu text-right">
                 <ul>
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="index.php">Home</a>
                     </li>
                     <li>
-                        <a href="categories.html">Categories</a>
+                        <a href="categories.php">Categories</a>
                     </li>
                     <li>
-                        <a href="foods.html">Foods</a>
+                        <a href="foods.php">Foods</a>
                     </li>
                     <li>
                         <a href="#">Contact</a>
@@ -46,7 +48,7 @@
     <section class="food-search text-center">
         <div class="container">
             
-            <form action="food-search.html" method="POST">
+            <form action="<?php echo SITEURL; ?>food-search.php" method="POST">
                 <input type="search" name="search" placeholder="Search for Food.." required>
                 <input type="submit" name="submit" value="Search" class="btn btn-primary">
             </form>
@@ -55,7 +57,39 @@
     </section>
     <!-- fOOD sEARCH Section Ends Here -->
 
+    <!-- CAtegories Section Starts Here -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="text-center">Kagua</h2>
 
+            <a href="category-foods.php">
+            <div class="box-3 float-container">
+                <img src="images/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
+
+                <h3 class="float-text text-white">Chapo</h3>
+            </div>
+            </a>
+
+            <a href="#">
+            <div class="box-3 float-container">
+                <img src="images/burger.jpg" alt="Burger" class="img-responsive img-curve">
+
+                <h3 class="float-text text-white">Samosa</h3>
+            </div>
+            </a>
+
+            <a href="#">
+            <div class="box-3 float-container">
+                <img src="images/momo.jpg" alt="Momo" class="img-responsive img-curve">
+
+                <h3 class="float-text text-white">Mushroom</h3>
+            </div>
+            </a>
+
+            <div class="clearfix"></div>
+        </div>
+    </section>
+    <!-- Categories Section Ends Here -->
 
     <!-- fOOD MEnu Section Starts Here -->
     <section class="food-menu">
@@ -68,14 +102,14 @@
                 </div>
 
                 <div class="food-menu-desc">
-                    <h4>Food Title</h4>
-                    <p class="food-price">$2.3</p>
+                    <h4>Chapo</h4>
+                    <p class="food-price">KES 160</p>
                     <p class="food-detail">
                         Made with Italian Sauce, Chicken, and organice vegetables.
                     </p>
                     <br>
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
+                    <a href="order.php" class="btn btn-primary">Order Now</a>
                 </div>
             </div>
 
@@ -85,8 +119,8 @@
                 </div>
 
                 <div class="food-menu-desc">
-                    <h4>Smoky Burger</h4>
-                    <p class="food-price">$2.3</p>
+                    <h4>Samosa</h4>
+                    <p class="food-price">KES 230</p>
                     <p class="food-detail">
                         Made with Italian Sauce, Chicken, and organice vegetables.
                     </p>
@@ -102,8 +136,8 @@
                 </div>
 
                 <div class="food-menu-desc">
-                    <h4>Nice Burger</h4>
-                    <p class="food-price">$2.3</p>
+                    <h4>Samosa</h4>
+                    <p class="food-price">KES 230</p>
                     <p class="food-detail">
                         Made with Italian Sauce, Chicken, and organice vegetables.
                     </p>
@@ -119,8 +153,8 @@
                 </div>
 
                 <div class="food-menu-desc">
-                    <h4>Food Title</h4>
-                    <p class="food-price">$2.3</p>
+                    <h4>Chapo</h4>
+                    <p class="food-price">KES 160</p>
                     <p class="food-detail">
                         Made with Italian Sauce, Chicken, and organice vegetables.
                     </p>
@@ -136,8 +170,8 @@
                 </div>
 
                 <div class="food-menu-desc">
-                    <h4>Food Title</h4>
-                    <p class="food-price">$2.3</p>
+                    <h4>Chapo</h4>
+                    <p class="food-price">KES 160</p>
                     <p class="food-detail">
                         Made with Italian Sauce, Chicken, and organice vegetables.
                     </p>
@@ -153,8 +187,8 @@
                 </div>
 
                 <div class="food-menu-desc">
-                    <h4>Chicken Steam Momo</h4>
-                    <p class="food-price">$2.3</p>
+                    <h4>Mushroom</h4>
+                    <p class="food-price">KES 395</p>
                     <p class="food-detail">
                         Made with Italian Sauce, Chicken, and organice vegetables.
                     </p>
@@ -171,6 +205,9 @@
 
         </div>
 
+        <p class="text-center">
+            <a href="#">See All Foods</a>
+        </p>
     </section>
     <!-- fOOD Menu Section Ends Here -->
 
@@ -195,7 +232,7 @@
     <!-- footer Section Starts Here -->
     <section class="footer">
         <div class="container text-center">
-            <p>All rights reserved. Designed By <a href="#">Vijay Thapa</a></p>
+            <p>All rights reserved. Designed By <a href="#">BitWilderInc</a></p>
         </div>
     </section>
     <!-- footer Section Ends Here -->

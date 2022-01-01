@@ -1,3 +1,5 @@
+<?php include('config/constants.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,13 +25,13 @@
             <div class="menu text-right">
                 <ul>
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="index.php">Home</a>
                     </li>
                     <li>
-                        <a href="categories.html">Categories</a>
+                        <a href="categories.php">Categories</a>
                     </li>
                     <li>
-                        <a href="foods.html">Foods</a>
+                        <a href="foods.php">Foods</a>
                     </li>
                     <li>
                         <a href="#">Contact</a>
