@@ -61,6 +61,19 @@
         <div class="container">
             <h2 class="text-center">Food Menu</h2>
 
+            <?php
+                // Get Search keyword and save in a variable 
+                $search = $_POST['search'];
+
+                // Create Sql query to get food based on search keyword
+                $sql = "SELECT * FROM tbl_food WHERE name='$search'; ";
+
+                // Execute query
+                $res = mysqli_query($conn, $sql);
+
+
+            ?>
+
             <div class="food-menu-box">
                 <div class="food-menu-img">
                     <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
