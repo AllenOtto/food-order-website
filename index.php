@@ -160,6 +160,8 @@
                         <?php
 
                     }
+                } else {
+                    echo "<div class='error'>No Food Items in Database</div>";
                 }
 
             ?>

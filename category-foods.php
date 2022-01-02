@@ -16,7 +16,12 @@
             $row_title = mysqli_fetch_assoc($res_title);
             // Get title
             $category_title = $row_title['title'];
+
+        } else {
+            echo "<div class='error'>No Categories in Database</div>";
         }
+    } else {
+        header('location:'.SITEURL);
     }
 ?>
 
@@ -114,7 +119,7 @@
 
                         <div class="food-menu-desc">
                             <h4><?php echo $title; ?></h4>
-                            <p class="food-price">Kes <?php echo $price; ?></p>
+                            <p class="food-price">KES <?php echo $price; ?></p>
                             <p class="food-detail">
                                 <?php echo $description; ?>
                             </p>
