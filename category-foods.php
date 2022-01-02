@@ -1,5 +1,25 @@
 <?php include('config/constants.php'); ?>
 
+<?php
+    if(isset($_GET['category_id'])) {
+        // Get category id passed via url
+        $category_id = $_GET['category_id'];
+        // Create sql query to get title of row where id=$category_id
+        $sql_title = "SELECT title FROM tbl_category WHERE id=$category_id";
+        // execute query
+        $res_title = mysqli_query($conn, $sql_title);
+        // Get row count
+        $count_title = mysqli_num_rows($res_title);
+        // Check if we have title result
+        if($count_title > 0) {
+            // Get result in an associative array
+            $row_title = mysqli_fetch_assoc($res_title);
+            // Get title
+            $category_title = $row_title['title'];
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +68,7 @@
     <section class="food-search text-center">
         <div class="container">
             
-            <h2>Foods on <a href="#" class="text-white">"Category"</a></h2>
+            <h2>Foods on <a href="#" class="text-white">"<?php echo $category_title; ?>"</a></h2>
 
         </div>
     </section>
@@ -62,8 +82,6 @@
             <h2 class="text-center">Food Menu</h2>
 
             <?php
-            // Get category id passed via url
-            $category_id = $_GET['id'];
             // Create sql query to get all food in chosen category
             $sql = "SELECT * FROM tbl_food WHERE category_id=$category_id; ";
             // Execute query
@@ -86,7 +104,7 @@
                             <?php
                                 if($image_name != "") {
                                     ?>
-                                        <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
+                                        <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="<?php echo $title; ?>" class="img-responsive img-curve">
                                     <?php
                                 }
                             ?>
