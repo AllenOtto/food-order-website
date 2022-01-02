@@ -60,31 +60,47 @@
     <!-- CAtegories Section Starts Here -->
     <section class="categories">
         <div class="container">
-            <h2 class="text-center">Kagua</h2>
+            <h2 class="text-center">Explore Foods</h2>
 
-            <a href="category-foods.php">
-            <div class="box-3 float-container">
-                <img src="images/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
+            <?php
+                // Write sql query to get categories of foods
+                $sql = "SELECT * FROM tbl_category WHERE  featured='Yes' AND active='Yes' LIMIT 3";
+                // Execute query
+                $res = mysqli_query($conn, $sql);
+                // Get row count
+                $count = mysqli_num_rows($res);
+                // Check if we have foods or not
+                if($count>0) {
+                    // There are categories of foods. Fetch them in an associative array
+                    while($row=mysqli_fetch_assoc($res)) {
+                        $id = $row['id'];
+                        $image_name = $row['image_name'];
+                        $title = $row['title'];
 
-                <h3 class="float-text text-white">Chapo</h3>
-            </div>
-            </a>
+                        ?>
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="images/burger.jpg" alt="Burger" class="img-responsive img-curve">
+                        <a href="<?php echo SITEURL; ?>category-foods.php?id=<?php echo $id; ?>">
+                        <div class="box-3 float-container">
+                            <?php 
+                                if($image_name != "") {
+                                    ?>
+                                    <img src="<?php echo SITEURL; ?>images/category/<?php echo $image_name; ?>" alt="Pizza" class="img-responsive img-curve">
+                                    <?php
+                                }
+                            ?>
 
-                <h3 class="float-text text-white">Samosa</h3>
-            </div>
-            </a>
+                            <h3 class="float-text text-white"><?php echo $title; ?></h3>
+                        </div>
+                        </a>
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="images/momo.jpg" alt="Momo" class="img-responsive img-curve">
-
-                <h3 class="float-text text-white">Mushroom</h3>
-            </div>
-            </a>
+                        <?php
+                    }
+                    
+                } else {
+                    // If count less than 0 there are no categories in db hence no associated foods
+                    echo "<div class='error'>Image Not Available</div>";
+                }
+            ?>
 
             <div class="clearfix"></div>
         </div>
