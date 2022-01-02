@@ -114,7 +114,7 @@
             <?php
                 // Display the array of food on the menu
                 // Create an sql query to get all food that is both active and featured
-                $sql2 = "SELECT * FROM tbl_food WHERE featured='Yes' AND active='Yes'; ";
+                $sql2 = "SELECT * FROM tbl_food WHERE featured='Yes' AND active='Yes' LIMIT 6; ";
                 // execute query
                 $res2 = mysqli_query($conn, $sql2);
                 // Get row count
@@ -172,7 +172,7 @@
         </div>
 
         <p class="text-center">
-            <a href="#">See All Foods</a>
+            <a href="<?php echo SITEURL; ?>foods.php">See All Foods</a>
         </p>
     </section>
     <!-- fOOD Menu Section Ends Here -->
