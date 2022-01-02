@@ -106,6 +106,8 @@
                                     ?>
                                         <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="<?php echo $title; ?>" class="img-responsive img-curve">
                                     <?php
+                                } else{
+                                    echo "<div class='error'>Image Not Available</div>";
                                 }
                             ?>
                         </div>
@@ -124,7 +126,7 @@
                     <?php
                 }
             } else {
-                echo "<div class='error'>None available yet</div>";
+                echo "<div class='error'>No Food Available Yet</div>";
             }
 
             ?>

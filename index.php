@@ -111,113 +111,63 @@
     <section class="food-menu">
         <div class="container">
             <h2 class="text-center">Food Menu</h2>
+            <?php
+                // Display the array of food on the menu
+                // Create an sql query to get all food that is both active and featured
+                $sql2 = "SELECT * FROM tbl_food WHERE featured='Yes' AND active='Yes'; ";
+                // execute query
+                $res2 = mysqli_query($conn, $sql2);
+                // Get row count
+                $count2 = mysqli_num_rows($res2);
+                // Check if there are food items or not
+                if($count2 > 0) {
+                    // Get food items in an associative array while there are still rows in the database
+                    while($row2=mysqli_fetch_assoc($res2)) {
+                        // Get data for individual food items
+                        $id2 = $row2['id'];
+                        $title2= $row2['title'];
+                        $price2 = $row2['price'];
+                        $image_name2 = $row2['image_name'];
+                        $description2 = $row2['description'];
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
+                        ?>
 
-                <div class="food-menu-desc">
-                    <h4>Chapo</h4>
-                    <p class="food-price">KES 160</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                        <div class="food-menu-box">
+                            <div class="food-menu-img">
+                                <?php
+                                    if($image_name2 != "") {
+                                        ?>
+                                            <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name2; ?>" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
+                                        <?php
+                                    } else {
+                                        echo "<div class='error'>No Image Available</div>";
+                                    }
+                                ?>
+                            </div>
 
-                    <a href="order.php" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                            <div class="food-menu-desc">
+                                <h4><?php echo $title2; ?></h4>
+                                <p class="food-price">KES <?php echo $price2; ?></p>
+                                <p class="food-detail">
+                                    <?php echo $description2; ?>
+                                </p>
+                                <br>
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/menu-burger.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
+                                <a href="<?php echo SITEURL; ?>order.php?id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
+                            </div>
+                        </div>
 
-                <div class="food-menu-desc">
-                    <h4>Samosa</h4>
-                    <p class="food-price">KES 230</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
+                        <?php
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
+                    }
+                }
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/menu-burger.jpg" alt="Chicke Hawain Burger" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Samosa</h4>
-                    <p class="food-price">KES 230</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Chapo</h4>
-                    <p class="food-price">KES 160</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Chapo</h4>
-                    <p class="food-price">KES 160</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/menu-momo.jpg" alt="Chicke Hawain Momo" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Mushroom</h4>
-                    <p class="food-price">KES 395</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-
-            <div class="clearfix"></div>
+            ?>
 
             
+
+            
+            <div class="clearfix"></div>
 
         </div>
 
