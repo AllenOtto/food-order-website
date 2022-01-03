@@ -50,7 +50,7 @@
             
             <h2 class="text-center text-white">Fill this form to confirm your order.</h2>
 
-            <form action="#" class="order">
+            <form action="" class="order" method="POST">
                 <fieldset>
                     <legend>Selected Food</legend>
 
@@ -94,7 +94,7 @@
                                     <p class="food-price">KES <?php echo $price; ?></p>
 
                                     <div class="order-label">Quantity</div>
-                                    <input type="number" name="qty" class="input-responsive" min='1' value="1" required>
+                                    <input type="number" name="qty" class="input-responsive" min='1' value='1' required>
                                     
                                 </div>
 
@@ -103,12 +103,13 @@
                             } else {
                                 // If there is no food result, the user didn't get here by clicking food item
                                 // Clicking food item would have given him an id and so there would be a result
-                                // So out with him
+                                // If id is not set redirect to index page
                                 header('location'.SITEURL);
                             }
 
                             
                         } else {
+                            // If id is not set redirect to index page
                             header('location:'.SITEURL);
                         }
                     ?>
@@ -129,10 +130,59 @@
                     <div class="order-label">Address</div>
                     <textarea name="address" rows="10" placeholder="E.g. Street, City, Country" class="input-responsive" required></textarea>
 
+                    <input type="hidden" name="food" value="<?php echo $title; ?>">
+                    <input type="hidden" name="price" value="<?php echo $price; ?>">
                     <input type="submit" name="submit" value="Confirm Order" class="btn btn-primary">
                 </fieldset>
 
             </form>
+
+            <?php
+                // if submit button is set, get form data
+                if(isset($_POST['submit'])) {
+                    $food = $_POST['food'];
+                    $price = $_POST['price'];
+                    $quantity = $_POST['qty'];
+                    $total = $quantity * $price; // Total = price * quantity
+                    $order_date = date("Y-m-d h:i:sa"); // Order date
+                    $status = "Ordered"; // Our Options: Ordered, On Delivery, Delivered, Cancelled
+                    $full_name = $_POST['full-name'];
+                    $contact = $_POST['contact'];
+                    $email = $_POST['email'];
+                    $address = $_POST['address'];
+                    
+                    // Create sql query to save data to database
+                    $sql2 = "INSERT INTO tbl_order SET
+                        food='$food',
+                        price=$price,
+                        qty=$quantity,
+                        total=$total,
+                        order_date='$order_date',
+                        status='$status',
+                        customer_name='$full_name',
+                        customer_contact='$contact',
+                        customer_email='$email',
+                        customer_address='$address'
+                    ";
+
+                    // Execute query
+                    $res2 = mysqli_query($conn, $sql2);
+                    
+                    // Check whether query has executed successfully or not
+                    if($res2==true) {
+                        // Query executed successfully
+                        $_SESSION['order'] = "<div class='success align-center'><h3>Food Ordered Successfully</h3></div>";
+                        header('location:'.SITEURL);
+
+                    } else {
+                        // Query execution failed
+                        // Set session message and redirect
+                        $_SESSION['order'] = "<div class='error align-center'><h3>Food Order Failed</h3></div>";
+                        header('location:'.SITEURL);
+                    }
+                }
+
+            ?>
 
         </div>
     </section>
