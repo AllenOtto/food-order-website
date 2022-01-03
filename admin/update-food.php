@@ -232,7 +232,7 @@
             header('location:'.SITEURL.'admin/manage-food.php');
         } else {
             // If it did not, redirect to manage food page with session error message
-            $_SESSION['update-food'] = "<div class='error'>Update Food</div>";
+            $_SESSION['update-food'] = "<div class='error'>Failed to Update Food</div>";
             header('location:'.SITEURL.'admin/manage-food.php');
         }
 
