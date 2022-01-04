@@ -122,7 +122,7 @@
                     <input type="text" name="full-name" placeholder="E.g. Allen Otto" class="input-responsive" required>
 
                     <div class="order-label">Phone Number</div>
-                    <input type="tel" name="contact" placeholder="E.g. 9843xxxxxx" class="input-responsive" required>
+                    <input type="tel" name="contact" placeholder="E.g. 0800xxxxxx" class="input-responsive" required>
 
                     <div class="order-label">Email</div>
                     <input type="email" name="email" placeholder="E.g. hi@allenotto.com" class="input-responsive" required>
@@ -171,13 +171,13 @@
                     // Check whether query has executed successfully or not
                     if($res2==true) {
                         // Query executed successfully
-                        $_SESSION['order'] = "<div class='success align-center'><h3>Food Ordered Successfully</h3></div>";
+                        $_SESSION['order'] = "<div class='success text-center'><h4>Order Placed</h4></div>";
                         header('location:'.SITEURL);
 
                     } else {
                         // Query execution failed
                         // Set session message and redirect
-                        $_SESSION['order'] = "<div class='error align-center'><h3>Food Order Failed</h3></div>";
+                        $_SESSION['order'] = "<div class='error text-center'><h4>Order Failed</h4></div>";
                         header('location:'.SITEURL);
                     }
                 }
