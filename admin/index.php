@@ -14,23 +14,69 @@
             ?>
             <br><br>
             <div class="col-4 text-center">
-                <h1>Pastries</h1><br>
+                <?php
+                    // Display total number of categories of foods available
+                    // Create sql to get all categories from database
+                    $sql = "SELECT * FROM tbl_category";
+                    // exeute query
+                    $res = mysqli_query($conn, $sql);
+                    // Get number of rows
+                    $count = mysqli_num_rows($res); // This is our number of categories
+                    
+                ?>
+                <h1><?php echo $count; ?></h1><br>
                 Categories
             </div>
 
             <div class="col-4 text-center">
-                <h1>Dishes</h1><br>
-                Categories
+                <?php
+                    // Display total number of categories of foods available
+                    // Create sql to get all categories from database
+                    $sql2 = "SELECT * FROM tbl_food";
+                    // exeute query
+                    $res2 = mysqli_query($conn, $sql2);
+                    // Get number of rows
+                    $count2 = mysqli_num_rows($res2); // This is our number of categories
+                    
+                ?>
+                <h1><?php echo $count2; ?></h1><br>
+                Foods
             </div>
 
             <div class="col-4 text-center">
-                <h1>Deserts</h1><br>
-                Categories
+                <?php
+                    // Display total number of categories of foods available
+                    // Create sql to get all categories from database
+                    $sql3 = "SELECT * FROM tbl_order";
+                    // exeute query
+                    $res3 = mysqli_query($conn, $sql3);
+                    // Get number of rows
+                    $count3 = mysqli_num_rows($res3); // This is our number of categories
+                    
+                ?>
+                <h1><?php echo $count3; ?></h1><br>
+                Total Orders
             </div>
 
             <div class="col-4 text-center">
-                <h1>Drinks</h1><br>
-                 Categories
+
+                <?php
+                    // Create sql query to get total revenue generated
+                    // Use the SUM() sql function
+                    $sql4 = "SELECT SUM(total) AS Total FROM tbl_order WHERE status='Delivered'; ";
+                    // Execute query
+                    $res4 = mysqli_query($conn, $sql4);
+                    // Get the value
+                    $row4 = mysqli_fetch_assoc($res4);
+                    // Retrieve total from our row result
+                    $total_revenue = $row4['Total'];
+
+
+                ?>
+
+
+                <h1>Ksh <?php echo $total_revenue; ?></h1><br>
+                 Revenue Generated
             </div>
 
             <div class="clearfix"></div>
