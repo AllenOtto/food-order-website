@@ -4,7 +4,15 @@
     <div class="main-content">
         <div class="wrapper">
             <h1>Orders</h1><br><br>
+
+            <?php
+                if(isset($_SESSION['update'])) { // Check if session message is set
+                    echo $_SESSION['update']; // Display session message
+                    unset($_SESSION['update']); // Remove session message on page refresh
+                }
+            ?>
             
+            <br>
             <table class="tbl-full text-center">
                         <tr>
                             <th>S.N.</th>
