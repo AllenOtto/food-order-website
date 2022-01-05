@@ -1,8 +1,20 @@
-<?php include('partials/menu.php') ?>
+<?php include('partials/menu.php'); ?>
 
     <div class="main-content">
         <div class="wrapper">
-            <h1>Update Password</h1><br><br>
+            <?php
+                if(isset($_GET['username']) && isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $username = $_GET['username'];
+
+                    echo "<h1>Update Password for $username</h1>";
+
+                } else {
+                    header('location:'.SITEURL.'admin/manage-admin.php');
+                }
+            ?>
+
+            <br><br>
 
             <?php
 
@@ -11,10 +23,6 @@
                     echo $_SESSION['password-mismatch'];
                     // unset session variable on page refresh
                     unset($_SESSION['password-mismatch']);
-                }
-             
-                if(isset($_GET['id'])){
-                    $id = $_GET['id'];
                 }
 
             ?>
@@ -49,9 +57,9 @@
         if(isset($_POST['submit'])) {
             // Get form data
             $id = $_POST['id'];
-            $current_password = md5($_POST['current_password']);
-            $new_password = md5($_POST['new_password']);
-            $confirm_password = md5($_POST['confirm_password']);
+            $current_password = $_POST['current_password'];
+            $new_password = $_POST['new_password'];
+            $confirm_password = $_POST['confirm_password'];
 
             // Check if user of id given has password matching one given
             // Create SQL statement to get user of said ID with said Password
@@ -73,7 +81,7 @@
                         // Create sql statement to Update the password
                         $sql2 = "UPDATE tbl_admin SET
                             password='$new_password'
-                            WHERE id='$id';
+                            WHERE id=$id;
                         ";
                         
                         // execute sql statement 
@@ -81,11 +89,11 @@
 
                         if($res2==true) {
                             // Set success session message and redirect
-                            $_SESSION['password-update'] = "<div class='success'>Password Updated</div>";
+                            $_SESSION['update'] = "<div class='success'>Password Updated</div>";
                             header('location:'.SITEURL.'admin/manage-admin.php');
                         } else {
                             // Set success session message and redirect
-                            $_SESSION['password-update'] = "<div class='error'>Password Updation Failed</div>";
+                            $_SESSION['update'] = "<div class='error'>Password Updation Failed</div>";
                             header('location:'.SITEURL.'admin/manage-admin.php');
                         }
 
@@ -102,10 +110,9 @@
                     $_SESSION['wrong-password'] = "<div class='error'>Wrong password</div>";
                     header('location:'.SITEURL.'admin/manage-admin.php');
                 }
-             
             }
 
         }    
     ?>
 
-<?php include('partials/footer.php') ?>
+<?php include('partials/footer.php'); ?>

@@ -57,14 +57,14 @@
     <?php
         if(isset($_POST['submit'])) {
             // Get table data
-            $title = $_POST['title'];
+            $title = mysqli_real_escape_string($conn, $_POST['title']);
 
             // For input type radio and checkbox we need to check
             // whether the button is checked or not. Sometimes neither
             // Yes or No option is checked
             if(isset($_POST['featured'])) {
                 // Get the value if button is selected
-                $featured = $_POST['featured'];
+                $featured = ($_POST['featured']);
             } else {
                 // Give a default value if neither is selected
                 $featured = "No";

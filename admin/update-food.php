@@ -136,8 +136,8 @@
     // Check whether submit button is clicked
     if(isset($_POST['submit'])) {
         $id = $_POST['id'];
-        $title = $_POST['title'];
-        $description = $_POST['description'];
+        $title = mysqli_real_escape_string($conn, $_POST['title']);
+        $description = mysqli_real_escape_string($conn, $_POST['description']);
         $price = $_POST['price'];
         $current_image = $_POST['current_image'];
         $category = $_POST['category'];

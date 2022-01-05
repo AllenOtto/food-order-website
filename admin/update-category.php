@@ -107,7 +107,7 @@
             if(isset($_POST['submit'])) {
                 // Get form data
                 $id = $_POST['id'];
-                $title = $_POST['title'];
+                $title = mysqli_real_escape_string($conn, $_POST['title']);
                 $current_name = $_POST['current_name'];
                 $featured = $_POST['featured'];
                 $active = $_POST['active'];

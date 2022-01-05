@@ -21,12 +21,12 @@
                 }
 
                 //Password Update session message
-                if(isset($_SESSION['password-update'])) {
+                if(isset($_SESSION['update'])) {
                     // If password_update session variable has been assigned a message
-                    echo $_SESSION['password-update'];
+                    echo $_SESSION['update'];
                     // Unset/Empty password_update session variable on page refresh
-                    unset($_SESSION['password-update']);
-                } 
+                    unset($_SESSION['update']);
+                }
 
                 // Wrong password for user at specified id
                 if(isset($_SESSION['wrong-password'])) {
@@ -63,8 +63,7 @@
                         $sn=1;
 
                         if ($count>0) { // We have rows in DB
-                            while($row=mysqli_fetch_assoc($res))
-                            { 
+                            while($row=mysqli_fetch_assoc($res)) { 
                                 // Using while loop to get all data from DB
                                 // While loop will run as long as we have data in DB
 
@@ -81,7 +80,7 @@
                                     <td><?php echo $full_name; ?></td>
                                     <td><?php echo $username; ?></td>
                                     <td>
-                                        <a href="<?php echo SITEURL; ?>admin/update-password.php?id=<?php echo $id; ?>" class="btn-primary">Update Password</a> 
+                                        <a href="<?php echo SITEURL; ?>admin/update-password.php?id=<?php echo $id; ?>&username=<?php echo $username; ?>" class="btn-primary">Update Password</a> 
                                         <a href="<?php echo SITEURL; ?>admin/update-admin.php?id=<?php echo $id; ?>" class="btn-secondary">Edit Details</a> 
                                         <a href="<?php echo SITEURL; ?>admin/delete-admin.php?id=<?php echo $id; ?>" class="btn-danger">Delete Admin</a>
                                     </td>
@@ -92,12 +91,13 @@
                                 
                             }
 
+                        } else {
+                            echo "<div class='error'>No Admins Yet</div>";
                         }
-
                     }
                 ?>
 
-            </table>    
+            </table>  
 
             <div class="clearfix"></div>
         </div>

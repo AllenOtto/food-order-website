@@ -42,8 +42,11 @@
     // Check whether the submit button is clicked
     if(isset($_POST['login'])) {
         // Get form data
-        $username = $_POST['username'];
-        $password = md5($_POST['password']);
+        $raw_username = $_POST['username'];
+        $raw_password = md5($_POST['password']);
+
+        $username = mysqli_real_escape_string($conn, $raw_username);
+        $password = mysqli_real_escape_string($conn, $raw_password);
 
         // Create SQL query for getting username and password from DB
         $sql = "SELECT * FROM tbl_admin WHERE username='$username' AND password='$password' ;";

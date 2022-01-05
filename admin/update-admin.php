@@ -54,41 +54,41 @@
 
             </form>
 
+            <?php
+            
+                // Process Data updation
+                if(isset($_POST['submit'])) {
+                    // Get all values from form for updating
+                    $id = $_POST['id'];
+                    $full_name = $_POST['full_name'];
+                    $username = $_POST['username'];
+
+                    // Create SQL query to update admin details
+                    $sql = "UPDATE tbl_admin SET
+                        full_name='$full_name',
+                        username='$username'
+                        WHERE id=$id
+                    ";
+
+                    // Execute SQL query
+                    $res = mysqli_query($conn, $sql);
+
+                    // Check that the query executed successfully
+                    if($res==True) {
+                        // Save Success Session message
+                        $_SESSION['update'] = '<div class="success">Entry Updated Successfully<div>';
+                        // Redirect user to manage-admin.php
+                        header('location:'.SITEURL.'admin/manage-admin.php');
+                    } else {
+                        // Save Error Session  message
+                        $_SESSION['update'] = '<div class="error">Update Failed<div>';
+                    }
+
+                }
+                    
+            ?>
+
         </div>
     </div>
-
-    <?php
-            
-    // Process Data updation
-    if(isset($_POST['submit'])) {
-        // Get all values from form for updating
-        $id = $_POST['id'];
-        $full_name = $_POST['full_name'];
-        $username = $_POST['username'];
-
-        // Create SQL query to update admin details
-        $sql = "UPDATE tbl_admin SET
-            full_name='$full_name',
-            username='$username'
-            WHERE id='$id'
-        ";
-
-        // Execute SQL query
-        $res = mysqli_query($conn, $sql);
-
-        // Check that the query executed successfully
-        if($res==True) {
-            // Save Success Session message
-            $_SESSION['update'] = '<div class="success">Entry Updated Successfully<div>';
-            // Redirect user to manage-admin.php
-            header('location:'.SITEURL.'admin/manage-admin.php');
-        } else {
-            // Save Error Session  message
-            $_SESSION['update'] = '<div class="error">Update Failed<div>';
-        }
-
-    }
-            
-    ?>
 
 <?php include('partials/footer.php'); ?>
