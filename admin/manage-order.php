@@ -65,7 +65,21 @@
                             <td><?php echo $qty; ?></td>
                             <td><?php echo $total; ?></td>
                             <td><?php echo $order_date; ?></td>
-                            <td><?php echo $status; ?></td>
+
+                            <td>
+                                <?php
+                                    if($status=="Ordered") {
+                                        echo "<lebel>$status</lebel>";
+                                    } else if($status=="On Delivery") {
+                                        echo "<lebel style='color: orange;'>$status</lebel>";
+                                    } else if($status=="Delivered") {
+                                        echo "<lebel style='color: green;'>$status</lebel>";
+                                    } else if($status=="Cancelled") {
+                                        echo "<lebel style='color: red;'>$status</lebel>";
+                                    }
+                                ?>
+                            </td>
+
                             <td><?php echo $customer_name; ?></td>
                             <td><?php echo $customer_contact; ?></td>
                             <td><?php echo $customer_email; ?></td>
