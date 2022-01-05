@@ -5,7 +5,7 @@
         <div class="wrapper">
             <h1>Orders</h1><br><br>
             
-            <table class="tbl-full">
+            <table class="tbl-full text-center">
                         <tr>
                             <th>S.N.</th>
                             <th>Food</th>
@@ -14,17 +14,17 @@
                             <th>Total</th>
                             <th>Order Date</th>
                             <th>Status</th>
-                            <th>Customer Name</th>
-                            <th>Customer Contact</th>
-                            <th>Customer Email</th>
-                            <th>Customer Address</th>
+                            <th>Name</th>
+                            <th>Contact</th>
+                            <th>Email</th>
+                            <th>Address</th>
                             <th>Actions</th>
                         </tr>
 
             <?php
 
             // Create sql query to get orders from database
-            $sql = "SELECT * FROM tbl_order";
+            $sql = "SELECT * FROM tbl_order ORDER BY id DESC"; // Display latest order first
             // Execute query
             $res = mysqli_query($conn, $sql);
             // Get row count
@@ -36,6 +36,7 @@
                 // Get data in an associative array
                 while($row=mysqli_fetch_assoc($res)) {
                     // Get individual data items
+                    $id = $row['id'];
                     $food = $row['food'];
                     $price = $row['price'];
                     $qty = $row['qty'];
@@ -61,15 +62,14 @@
                             <td><?php echo $customer_contact; ?></td>
                             <td><?php echo $customer_email; ?></td>
                             <td><?php echo $customer_address; ?></td>
-                            <td><a href="#" class="btn-secondary">Edit</a></td>
+                            <td><a href="<?php echo SITEURL; ?>admin/update-order.php?id=<?php echo $id; ?>" class="btn-secondary">Edit</a></td>
                         </tr>
                     <?php
                 }
 
             } else{
-                // Set session message and redirect
-                $_SESSION['order'] = "<div class='error'>No Orders Yet</div>";
-                header('location:'.SITEURL.'admin/manage-order.php');
+                // Display error message
+                echo "<tr colspan='12'><td class='error'>No Orders Yet</td></tr>";
             }
 
             ?>
