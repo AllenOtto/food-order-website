@@ -1,6 +1,6 @@
-# Counter Application
+# Food Order Website
 
-**Version 0.0.1**
+**Version 1.0.0**
 
 This is a basic eCommerce site that allows the admin to add foods organized into categories and allow users to
 select and order for them, searching for them in the search input where necessary and get the food delivered to
