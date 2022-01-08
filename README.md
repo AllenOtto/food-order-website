@@ -13,7 +13,7 @@ areas they are allowed into.
 
 ## contributors
 
-[AllenOtto](https://www.bitwilder.ga) <!-- Online though presently still under construction -->
+[AllenOtto](https://www.bitwilder.ga / https://www.bitwildertech.ga) <!-- Online though presently still under construction -->
 
 ---
 
